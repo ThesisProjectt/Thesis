@@ -1,0 +1,66 @@
+/* Styles.css */
+.logo-container {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .logo {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+  }
+  
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .form {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: gray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #61d8d8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .logo {
+      width: 150px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .logo {
+      width: 100px;
+    }
+  }
+  

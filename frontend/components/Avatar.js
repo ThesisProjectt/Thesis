@@ -2,6 +2,7 @@ import { Image, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ip from "../functions/IpAdress";
 
 export default function Avatar() {
 
@@ -11,7 +12,7 @@ export default function Avatar() {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
       try {
-        await axios(`http://192.168.11.126:3000/client/getimg/${user.id}`)
+        await axios(`${ip}:3000/client/getimg/${user.id}`)
         .then((res) => {
             setImage(res.data)
           })

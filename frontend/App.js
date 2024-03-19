@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useRef } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,7 +22,6 @@ import RequestStyle from './components/styles/RequestStyle';
 const Stack = createStackNavigator();
 
 export default function App() {
-   const ref = useRef();
 
   const [fontsLoaded] = useFonts({
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
@@ -34,7 +32,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator >
+      <Stack.Navigator>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
         <Stack.Screen name="Carouss" component={Carouss} options={{headerShown:false}} />       

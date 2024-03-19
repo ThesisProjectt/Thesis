@@ -14,6 +14,7 @@ import Calender from "./Calendar";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
+import ip from "../functions/IpAdress";
 
 const Request = ({ navigation, route }) => {
 
@@ -59,8 +60,8 @@ const Request = ({ navigation, route }) => {
           longitude: region.longitude,
         };
         const data = { start: selected, pack_id: 1, client_id: user.id };
-        await axios.put(`http://192.168.11.126:3000/client/update/${user.id}`,localData);
-        await axios.post(`http://192.168.11.126:3000/request/postrequest`, data);
+        await axios.put(`${ip}:3000/client/update/${user.id}`,localData);
+        await axios.post(`${ip}:3000/request/postrequest`, data);
         ToastAndroid.show('Request sent successfully!', ToastAndroid.BOTTOM);
         navigation.navigate("Home");
       } catch (err) {
@@ -73,7 +74,7 @@ const Request = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
-      axios(`http://192.168.11.126:3000/client/profile/${user.id}`)
+      axios(`${ip}:3000/client/profile/${user.id}`)
         .then((result) => {
           if (result.data.longitude && result.data.latitude) {
             setRegion({

@@ -3,6 +3,7 @@ import { useState,useEffect,useRef  } from "react";
 import { Checkbox } from 'react-native-paper'
 import axios from 'axios'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../functions/IpAdress";
 
 
 export default CreateCustom = ({navigation,route})=>{
@@ -20,7 +21,7 @@ console.log(catid,"from creation")
    
       const fetchServices = async (id) => {
         try {
-      const response = await fetch(`http://192.168.11.126:3000/services/getServicebycategory/${id}`)
+      const response = await fetch(`${ip}:3000/services/getServicebycategory/${id}`)
         const data = await response.json()
         console.log(data)
         setServices(data)
@@ -38,7 +39,7 @@ console.log(catid,"from creation")
         quantity:quantity,
         total:element.price*quantity
       }
-        axios.post("http://192.168.11.126:3000/packhasservice/addAPack",obj)
+        axios.post(`${ip}:3000/packhasservice/addAPack`,obj)
         .then((res)=>{console.log("added")})  
         .catch((error)=>{console.log(error,"error")})
     }
@@ -54,7 +55,7 @@ const deleteFromPack = async (element) => {
     pack_id:packid,
     service_id:element.id,
   }
-  axios.delete(`http://192.168.11.126:3000/packhasservice/deleteFromPack`,obj)
+  axios.delete(`${ip}:3000/packhasservice/deleteFromPack`,obj)
   .then((res)=>{console.log("deleted")})  
         .catch((error)=>{console.log(error,"error")})
 }

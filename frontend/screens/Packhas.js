@@ -4,6 +4,8 @@ import { useState,useRef,useEffect} from "react";
 import axios from 'axios'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
+import ip from "../functions/IpAdress";
+
 export  const Slider_Width=Dimensions.get('window').width+40
 export const Item_Width=Math.round(Slider_Width*0.8)
 
@@ -23,7 +25,7 @@ const [total,setTotal]=useState(0)
       const fetchPacks = async (id) => {
         try {
           setLoading(true)
-      const response = await fetch(`http://192.168.11.126:3000/pack/get/${id}`)
+      const response = await fetch(`${ip}:3000/pack/get/${id}`)
         const data = await response.json()
         console.log(data)
         setPacks(data)
@@ -38,7 +40,7 @@ const [total,setTotal]=useState(0)
         const user = JSON.parse(await AsyncStorage.getItem("user"));
 
         const data = {name:"Custom Pack",status:"ClientPack",client_id:user.id} 
-          axios.post("http://192.168.11.126:3000/pack/addPack",data)
+          axios.post(`${ip}:3000/pack/addPack`,data)
           .then(async (res)=>{console.log(res.data)
        await AsyncStorage.setItem("packid",JSON.stringify(res.data.id))
           })
@@ -71,7 +73,7 @@ useEffect(()=>{
 <View style={{marginTop:8,marginRight:4,marginLeft:4,backgroundColor:"white",width:"95%",marginLeft:"auto", marginRight:"auto",borderRadius:20,height:80}}>
                     <Text className="font-bold text-xl text-left h-8 mt-2 text-blue-400 " > {item.name} </Text>
                     <Text className=" text-lg font-bold text-blue-400" >  Total : {(item?.Services.reduce((total,element)=>  (total+element.price),0))}  </Text>
-                    </View> 
+                    </View>
                     <View className="p-4">
                 {item.Services.map((ele,index)=> {return (      
                                 <View key={index}> 

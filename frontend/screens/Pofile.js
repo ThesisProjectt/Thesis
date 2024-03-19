@@ -12,6 +12,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../functions/IpAdress";
 
 
 const ProfilePage = () => {
@@ -29,7 +30,7 @@ const ProfilePage = () => {
     try{
       const user = JSON.parse(await AsyncStorage.getItem("user"));
       setId(user.id)
-      let res= await axios.get(`http://192.168.11.126:3000/client/oneclient/${user.id}`)
+      let res= await axios.get(`${ip}:3000/client/oneclient/${user.id}`)
       console.log(res.data[0]);
       setUserData(res.data[0])
       setProfileImage(res.data[0].image)
@@ -49,7 +50,7 @@ const ProfilePage = () => {
         password: password,
         image: profileImage
       }
-      res=await axios.put(`http://192.168.11.126:3000/client/updateclient/${id}`,obj)
+      res=await axios.put(`${ip}:3000/client/updateclient/${id}`,obj)
       setR(!r)
       alert("Update Successful!")
     }catch(err){
@@ -86,7 +87,7 @@ const ProfilePage = () => {
         password: userData.password,
         image: result.assets[0].uri
       }
-      res=await axios.put('http://192.168.104.14:3000/client/updateclient/1',obj)
+      res=await axios.put(`${ip}:3000/client/updateclient/${id}`,obj)
       setR(!r)
       alert("image updated  Successful!")
     }catch(err){

@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import { View,Image,Text,StyleSheet,FlatList,Pressable,StatusBar,TouchableOpacity  } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import Loading  from "../components/Loading";
+import ip from "../functions/IpAdress";
 
 export default function Catego({navigation}) {
   const [categories,setCategories]=useState([])
@@ -11,7 +12,7 @@ const [loading,setLoading]=useState(false)
   const fetchCategories = async () => {
     try {
       setLoading(true)
-  const response = await fetch(`http://192.168.11.126:3000/category/getCategories`)
+  const response = await fetch(`${ip}:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     setLoading(false)

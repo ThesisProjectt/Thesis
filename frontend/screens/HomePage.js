@@ -14,11 +14,17 @@ import {
 import homepage from "../assets/homepage 1-1.png";
 import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
+import About from "./About";
 
-const HomePage = ({navigation}) => {
-
+const HomePage = ({ navigation }) => {
   const Item = ({ image, title, id }) => (
-    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Carouss",{catid:id,catName:title})} style={styles.item}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() =>
+        navigation.navigate("Carouss", { catid: id, catName: title })
+      }
+      style={styles.item}
+    >
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>
@@ -40,7 +46,10 @@ const HomePage = ({navigation}) => {
         >
           Categories
         </Text>
-        <TouchableOpacity className="h-10" onPress={() => navigation.navigate("Categories")}>
+        <TouchableOpacity
+          className="h-10"
+          onPress={() => navigation.navigate("Categories")}
+        >
           <Text
             style={{ fontFamily: "Poppins-Regular" }}
             className="text-lg font-normal text-blue-800"
@@ -56,7 +65,7 @@ const HomePage = ({navigation}) => {
           alwaysBounceHorizontal
           data={imageData}
           renderItem={({ item }) => (
-            <Item image={item.image} title={item.name} id= {item.id}/>
+            <Item image={item.image} title={item.name} id={item.id} />
           )}
           keyExtractor={(item) => item.id}
         />
@@ -70,7 +79,14 @@ const HomePage = ({navigation}) => {
       <View className=" -mt-9 items-center">
         <Image source={homepage2} style={styles.image2} />
       </View>
-      <View style={{ height: 100, backgroundColor: "#EFFFFD" }}></View>
+      <Text
+        style={{ fontFamily: "Poppins" }}
+        className="text-2xl text-blue-800 text-center pt-16 pb-3"
+      >
+        About Us
+      </Text>
+      <About />
+      {/* <View style={{ height: 30, backgroundColor: "#EFFFFD" }}></View> */}
     </ScrollView>
   );
 };
@@ -80,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight,
     // paddingHorizontal: 15,
-    zIndex:1
+    zIndex: 1,
   },
   item: {
     width: 150,
@@ -91,13 +107,13 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 240,
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
   image2: {
     marginTop: 50,
     height: 180,
     borderRadius: 16,
-    width: Dimensions.get("screen").width-20,
+    width: Dimensions.get("screen").width - 20,
   },
   card: {
     justifyContent: "center",

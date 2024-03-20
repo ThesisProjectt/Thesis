@@ -17,11 +17,12 @@ import imageData from "../functions/Categories";
 import About from "./About";
 
 const HomePage = ({ navigation }) => {
+  
   const Item = ({ image, title, id }) => (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() =>
-        navigation.navigate("Carouss", { catid: id, catName: title })
+        navigation.navigate("Packs", { catid: id, catName: title })
       }
       style={styles.item}
     >

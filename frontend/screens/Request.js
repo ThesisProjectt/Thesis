@@ -22,9 +22,7 @@ const Request = ({ navigation, route }) => {
   const [region, setRegion] = useState({});
   const [mark, setMark] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { packid } = route.params
-  console.log(packid,"route");
-
+  const { packid, name } = route.params
 
   const onRegionChange = (regions) => {
     const localisation = {
@@ -55,18 +53,26 @@ const Request = ({ navigation, route }) => {
       try {
         setLoading(true);
         const user = JSON.parse(await AsyncStorage.getItem("user"));
+        const token = JSON.parse(await AsyncStorage.getItem("token"))
         const localData = {
           latitude: region.latitude,
           longitude: region.longitude,
         };
-        const data = { start: selected, pack_id: 1, client_id: user.id };
-        await axios.put(`${ip}:3000/client/update/${user.id}`,localData);
-        await axios.post(`${ip}:3000/request/postrequest`, data);
+        const data = { start: selected, pack_id: packid, client_id: user.id };
+        await axios.put(`${ip}:3000/client/update/${user.id}`,localData, {
+          headers: {
+            'authorization': token
+          }});
+        await axios.post(`${ip}:3000/request/postrequest`, data, {
+          headers: {
+            'authorization': token
+          }});
         ToastAndroid.show('Request sent successfully!', ToastAndroid.BOTTOM);
         navigation.navigate("Home");
       } catch (err) {
         setLoading(false);
         console.error(err);
+        navigation.replace("Login")
       }
     }
   };
@@ -74,8 +80,14 @@ const Request = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
-      axios(`${ip}:3000/client/profile/${user.id}`)
+      const token = JSON.parse(await AsyncStorage.getItem("token"))
+      console.log(token);
+      axios(`${ip}:3000/client/profile/${user.id}`, {
+        headers: {
+          'authorization': token
+        }})
         .then((result) => {
+          console.log(result.headers);
           if (result.data.longitude && result.data.latitude) {
             setRegion({
               latitude: parseFloat(result.data.latitude),
@@ -86,6 +98,7 @@ const Request = ({ navigation, route }) => {
         })
         .catch((err) => {
           console.error(err);
+          navigation.replace("Login")
         });
     })()
   }, []);
@@ -119,16 +132,22 @@ const Request = ({ navigation, route }) => {
           />
 
           <View className="items-center mt-9">
-            <View className=" shadow-xl p-3 bg-slate-100 flex-1 w-72 rounded-2xl shadow-slate-500">
+            <View className=" shadow-2xl p-3 bg-blue-400 flex-1 w-72 rounded-2xl shadow-slate-500">
               <View className="flex-1 flex-col items-center">
                 <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
-                  Your pack:{packid}
+                  Your pack:
+                </Text>
+                <Text
+                  className="text-xl text-white"
+                  style={{ fontFamily: "Poppins" }}
+                >
+                  {name}
                 </Text>
                 <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
                   Your date:
                 </Text>
                 <Text
-                  className="text-md text-red-500"
+                  className="text-xl text-white"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {selected || "No Date Selected"}
@@ -139,7 +158,7 @@ const Request = ({ navigation, route }) => {
                   Your location:
                 </Text>
                 <Text
-                  className="text-md text-red-500"
+                  className="text-xl text-white"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {`${region.latitude}, ${region.longitude}` || "No Location Selected"}

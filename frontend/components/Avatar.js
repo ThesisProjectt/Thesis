@@ -11,8 +11,12 @@ export default function Avatar() {
   useEffect(()=>{
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
+      const token = JSON.parse(await AsyncStorage.getItem("token"))
       try {
-        await axios(`${ip}:3000/client/getimg/${user.id}`)
+        await axios(`${ip}:3000/client/getimg/${user.id}`, {
+          headers: {
+            'authorization': token
+          }})
         .then((res) => {
             setImage(res.data)
           })
@@ -34,5 +38,5 @@ export default function Avatar() {
 }
 
 const handleProfile = async () => {
-  await AsyncStorage.clear()
+  
 }

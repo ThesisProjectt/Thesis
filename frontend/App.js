@@ -18,6 +18,9 @@ import About from './screens/About';
 import AboutStyle from './components/styles/AboutStyle';
 import Request from './screens/Request';
 import RequestStyle from './components/styles/RequestStyle';
+import PackStyle from './components/styles/PackStyle';
+import CreatePack from './screens/CreatePack';
+import CreatePackServices from './screens/CreatePackServices';
 
 const Stack = createStackNavigator();
 
@@ -35,7 +38,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
-        <Stack.Screen name="Carouss" component={Carouss} options={{headerShown:false}} />       
+        <Stack.Screen name="Packs" component={Packs} options={PackStyle}/>       
         <Stack.Screen name='BottomNav' component={BottomNav} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
@@ -45,6 +48,8 @@ export default function App() {
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
+        <Stack.Screen name='Custom Pack' component={CreatePack} options={RequestStyle}/>
+        <Stack.Screen name='Custom' component={CreatePackServices} options={RequestStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

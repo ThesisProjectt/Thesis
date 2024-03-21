@@ -18,7 +18,9 @@ import About from './screens/About';
 import AboutStyle from './components/styles/AboutStyle';
 import Request from './screens/Request';
 import RequestStyle from './components/styles/RequestStyle';
-
+import Payment from './screens/Payment'
+import Success from './screens/Success'
+import Fail from './screens/Fail'
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -33,6 +35,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
+        <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
+        <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
         <Stack.Screen name="Carouss" component={Carouss} options={{headerShown:false}} />       
@@ -44,7 +49,6 @@ export default function App() {
         <Stack.Screen name="CreateCustom" component={CreateCustom}/>
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
-        <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

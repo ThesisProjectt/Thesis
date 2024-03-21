@@ -15,10 +15,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ip from "../functions/IpAdress";
 
 
-const ProfilePage = () => {
+const ProfilePage = ({navigation}) => {
   const [editImage, setEditImage] = useState(false);
   const [editDetails, setEditDetails] = useState(false);
-  const  [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
   const [name, setName] = useState("rbk");
   const [email, setEmail] = useState("rbk@example.com");
   const [phone, setPhone] = useState("123-456-7890");
@@ -109,7 +109,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <View style={styles.cont} className="container flex h-full">
+    <View style={styles.cont} className="container  flex h-full">
     <View style={styles.bgimg} className="flex w-full h-48 rounded-b-3xl">
     <View  className=" items-center relative top-28 mb-5">
         <View style={styles.img} className="relative p-2 rounded-full">
@@ -187,7 +187,7 @@ const ProfilePage = () => {
           />
           
         ) : (
-          <Text className=" mb-5">********</Text>
+          <Text className=" mb-5">***********</Text>
         )}
         {editDetails ? (
           <Button style={styles.textc}
@@ -197,6 +197,27 @@ const ProfilePage = () => {
         />
         ) : null }
         
+      </View>
+      <View className="items-center justify-end">
+      <TouchableOpacity
+            className="justify-center rounded-2xl items-center mt-2"
+            activeOpacity={0.8}
+            style={{
+              width: 330,
+              backgroundColor: "#B21212",
+              height: 51,
+            }}
+            onPress={async() => {
+              await AsyncStorage.clear()
+              navigation.replace("Login")}}
+          >
+            <Text
+              className="text-white text-xl"
+              style={{ fontFamily: "Poppins" }}
+            >
+              Log out
+            </Text>
+          </TouchableOpacity>
       </View>
     </View>
   );

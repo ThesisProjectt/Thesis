@@ -4,7 +4,8 @@ const sequelize = require('../database/index');
 const Payment = sequelize.define('Payment', {
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement:true,
   },
   request_id: {
     type: DataTypes.INTEGER,

@@ -1,7 +1,7 @@
 import Avatar from '../Avatar';
 import { Ionicons } from "@expo/vector-icons";
 
-export default Request = {
+export default Packs = {
   headerShown: true,
   headerTitleAlign: "center",
   // headerLeft: () => (

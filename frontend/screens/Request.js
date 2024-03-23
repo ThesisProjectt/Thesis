@@ -6,7 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Map from "./Map";
@@ -17,12 +17,32 @@ import Loading from "../components/Loading";
 import ip from "../functions/IpAdress";
 
 const Request = ({ navigation, route }) => {
-
   const [selected, setSelected] = useState("");
   const [region, setRegion] = useState({});
   const [mark, setMark] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { packid, name } = route.params
+  const [place, setPlace] = useState("");
+  const { packid, name } = route.params;
+
+  const getPlace = async (region) => {
+    try {
+      axios(
+        `https://geocode.maps.co/reverse?lat=${region.latitude}&lon=${region.longitude}&api_key=65fe2c523a04e045323131pzk527ffc`
+      ).then((result) => {
+        console.log(result.data.address, "place");
+        setPlace(
+          // result.data.address.state+" ,"+result.data.address.state_district ||
+          result.data.address.county+" ,"+result.data.address.state ||
+          result.data.address.residential ||
+          result.data.address.village ||
+          result.data.address.suburb ||
+          result.data.address.state
+        );
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onRegionChange = (regions) => {
     const localisation = {
@@ -31,6 +51,7 @@ const Request = ({ navigation, route }) => {
     };
     if (!mark) {
       setRegion(localisation);
+      getPlace(localisation);
     }
   };
 
@@ -42,6 +63,7 @@ const Request = ({ navigation, route }) => {
     };
     setRegion(localisation);
     setMark(true);
+    getPlace(localisation);
   };
 
   const handleSumbit = async () => {
@@ -53,26 +75,28 @@ const Request = ({ navigation, route }) => {
       try {
         setLoading(true);
         const user = JSON.parse(await AsyncStorage.getItem("user"));
-        const token = JSON.parse(await AsyncStorage.getItem("token"))
+        const token = JSON.parse(await AsyncStorage.getItem("token"));
         const localData = {
           latitude: region.latitude,
           longitude: region.longitude,
         };
         const data = { start: selected, pack_id: packid, client_id: user.id };
-        await axios.put(`${ip}:3000/client/update/${user.id}`,localData, {
+        await axios.put(`${ip}:3000/client/update/${user.id}`, localData, {
           headers: {
-            'authorization': token
-          }});
+            authorization: token,
+          },
+        });
         await axios.post(`${ip}:3000/request/postrequest`, data, {
           headers: {
-            'authorization': token
-          }});
-        ToastAndroid.show('Request sent successfully!', ToastAndroid.BOTTOM);
+            authorization: token,
+          },
+        });
+        ToastAndroid.show("Request sent successfully!", ToastAndroid.BOTTOM);
         navigation.navigate("Home");
       } catch (err) {
         setLoading(false);
         console.error(err);
-        navigation.replace("Login")
+        navigation.replace("Login");
       }
     }
   };
@@ -80,27 +104,32 @@ const Request = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
-      const token = JSON.parse(await AsyncStorage.getItem("token"))
+      const token = JSON.parse(await AsyncStorage.getItem("token"));
       console.log(token);
       axios(`${ip}:3000/client/profile/${user.id}`, {
         headers: {
-          'authorization': token
-        }})
+          authorization: token,
+        },
+      })
         .then((result) => {
-          console.log(result.headers);
+          const localisation = {
+            latitude: result.data.latitude,
+            longitude: result.data.longitude,
+          };
           if (result.data.longitude && result.data.latitude) {
             setRegion({
               latitude: parseFloat(result.data.latitude),
               longitude: parseFloat(result.data.longitude),
             });
             setMark(true);
+            getPlace(localisation);
           }
         })
         .catch((err) => {
           console.error(err);
-          navigation.replace("Login")
+          navigation.replace("Login");
         });
-    })()
+    })();
   }, []);
 
   return (
@@ -132,41 +161,45 @@ const Request = ({ navigation, route }) => {
           />
 
           <View className="items-center mt-9">
-            <View className=" shadow-2xl p-3 bg-blue-400 flex-1 w-72 rounded-2xl shadow-slate-500">
-              <View className="flex-1 flex-col items-center">
-                <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
-                  Your pack:
+            <View className=" shadow-2xl p-6 bg-blue-400 flex-1 w-full h-52 rounded-2xl shadow-gray-500">
+              <View className="flex-1 flex-col">
+                <Text
+                  className="text-md text-gray-700"
+                  style={{ fontFamily: "Poppins-Regular" }}
+                >
+                  Your pack
                 </Text>
                 <Text
-                  className="text-xl text-white"
+                  className="text-xl text-gray-900 pl-2"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {name}
                 </Text>
-                <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
-                  Your date:
+                <Text
+                  className="text-md text-gray-700 mt-3"
+                  style={{ fontFamily: "Poppins-Regular" }}
+                >
+                  Your date
                 </Text>
                 <Text
-                  className="text-xl text-white"
+                  className="text-xl text-gray-900 pl-2"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {selected || "No Date Selected"}
                 </Text>
               </View>
-              <View className="flex-1 flex-col items-center mt-2">
-                <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
-                  Your location:
-                </Text>
+              <View className="flex-1 flex-col items-center w-32 mt-2 absolute right-3 bottom-3 bg-blue-600 shadow-lg shadow-slate-600 rounded-lg p-1">
+                <Ionicons name="locate-outline" size={32} color="#fff" />
                 <Text
-                  className="text-xl text-white"
+                  className="text-xs text-white"
                   style={{ fontFamily: "Poppins" }}
                 >
-                  {`${region.latitude}, ${region.longitude}` || "No Location Selected"}
+                  {`${place}` || "No Location Selected"}
                 </Text>
               </View>
             </View>
             <TouchableOpacity
-              className=" bg-blue-800 rounded-xl shadow-xl p-2 w-44 items-center my-6 shadow-slate-700"
+              className=" bg-blue-800 rounded-xl shadow-xl p-2 w-60 items-center my-6 shadow-slate-700"
               activeOpacity={0.6}
               onPress={handleSumbit}
             >
@@ -188,7 +221,7 @@ const Request = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 10,

@@ -16,7 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
 import ip from "../functions/IpAdress";
 import { SafeAreaView } from "react-native-safe-area-context";
-export const Slider_Width = Dimensions.get("window").width+5;
+export const Slider_Width = Dimensions.get("window").width;
 export const Item_Width = Math.round(Slider_Width * 0.85);
 
 export default Packs = ({ navigation, route }) => {
@@ -58,6 +58,7 @@ export default Packs = ({ navigation, route }) => {
             itemWidth={Item_Width}
             onSnaptoItem={(index) => setIndex(index)}
             keyExtractor={(item) => item.id}
+            
             renderItem={({ item }) => {
               return (
                 <View>

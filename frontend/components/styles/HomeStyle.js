@@ -1,11 +1,18 @@
 
+import { Image } from 'react-native';
 import Avatar from '../Avatar';
-import { Ionicons } from "@expo/vector-icons"; 
+import { Ionicons } from "@expo/vector-icons";
+import logo from "../../assets/LOGO Cleaning.png"
 
 export default Home = {
     headerShown:true, 
     headerTitleAlign: "center", 
-    headerLeft: false, 
+  headerLeft: () => (
+    <Image
+      source={ logo }
+      style={{ width:40, height:40, marginLeft: 20}}
+    />
+  ),
     headerRight: (props) => <Avatar {...props} />,
     // headerTransparent: true,
     headerStyle: {

@@ -15,10 +15,14 @@ import About from './screens/About';
 import AboutStyle from './components/styles/AboutStyle';
 import Request from './screens/Request';
 import RequestStyle from './components/styles/RequestStyle';
+import Payment from './screens/Payment'
+import Success from './screens/Success'
+import Fail from './screens/Fail'
 import PackStyle from './components/styles/PackStyle';
 import CreatePack from './screens/CreatePack';
 import CreatePackServices from './screens/CreatePackServices';
 import Packhas from './screens/Packhas';
+
 
 const Stack = createStackNavigator();
 
@@ -34,6 +38,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
+        <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
+        <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Packs" component={Packhas} options={PackStyle}/>
         <Stack.Screen name='BottomNav' component={BottomNav} options={{headerShown:false}}/>

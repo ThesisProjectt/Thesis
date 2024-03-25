@@ -27,7 +27,6 @@ const CreatePackServices = ({ navigation, route }) => {
       await axios(`${ip}:3000/services/getServicebycategory/${catid}`)
         .then((result) => {
           setServices(result.data);
-          console.log(result.data, "result");
           setLoading(false);
         })
         .catch((err) => {
@@ -38,13 +37,13 @@ const CreatePackServices = ({ navigation, route }) => {
   }, []);
 
   const Item = ({ image, name, id, price }) => (
-    <View className="flex-row items-center my-1">
+    <View className="flex-row items-center my-1 justify-center">
       <View className="bg-white p-3 items-center justify-center rounded-xl w-11 h-11 shadow-sm ml-1 shadow-black">
         <Image src={image} style={{ width: 33, height: 33 }} />
       </View>
       <Text
-        style={{ fontFamily: "Poppins-Regular" }}
-        className=" text-blue-800 text-lg w-64 bg-white p-2 mx-2 rounded-xl shadow-sm shadow-black"
+        style={{ fontFamily: "Poppins-Regular",}}
+        className=" text-blue-800 text-lg landscape: bg-white   w-8/12 p-2 mx-2 rounded-xl shadow-sm shadow-black"
       >
         {name}
       </Text>
@@ -66,7 +65,6 @@ const CreatePackServices = ({ navigation, route }) => {
       setTotal(total + price);
       setSelectedItems([...selectedItems, id]);
     }
-    console.log(selectedItems);
   };
 
   const handleValue = (id) => {
@@ -103,8 +101,10 @@ const CreatePackServices = ({ navigation, route }) => {
               )}
               keyExtractor={(item) => item.id}
             />
+            <View className="self-center">
+
             <View
-              style={{ maxWidth: 360 }}
+              style={{ width: "95%" }}
               className="text-blue-800 text-base flex-row justify-between bg-white p-2 rounded-xl shadow-sm shadow-black"
             >
               <Text
@@ -119,6 +119,7 @@ const CreatePackServices = ({ navigation, route }) => {
               >
                 {total} $
               </Text>
+            </View>
             </View>
           </View>
           <View className="items-center flex-1 justify-end mb-5 gap-2">
@@ -180,12 +181,13 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     backgroundColor: "#EFFFFD",
     alignItems: "center",
-    width: Dimensions.get("window").width,
+    width: Dimensions.get("window").width
   },
   flatContainer2: {
+    display: "flex",
     // alignItems: "center",
     // justifyContent: "center",
-    width: Dimensions.get("window").width - 15,
+    width: Dimensions.get("window").width,
     maxHeight: 550,
     marginBottom: 20,
   },

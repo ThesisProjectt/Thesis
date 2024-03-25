@@ -5,11 +5,9 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  Pressable,
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import Loading from "../components/Loading";
 import ip from "../functions/IpAdress";
 
@@ -58,7 +56,6 @@ export default function Catego({ navigation }) {
                     source={{ uri: item.image }}
                     style={styles.flatImage}
                   />
-                  {console.log(item)}
                 </View>
                 <Text
                   style={{ fontFamily: "Poppins" }}

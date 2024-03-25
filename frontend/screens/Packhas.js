@@ -26,7 +26,7 @@ export default Packs = ({ navigation, route }) => {
   const [total, setTotal] = useState(0);
   const [index, setIndex] = useState();
   const isCarousel = useRef(null);
-
+console.log(Dimensions.get("window").width)
   useEffect(() => {
     (async () => {
       try {
@@ -58,7 +58,6 @@ export default Packs = ({ navigation, route }) => {
             itemWidth={Item_Width}
             onSnaptoItem={(index) => setIndex(index)}
             keyExtractor={(item) => item.id}
-            
             renderItem={({ item }) => {
               return (
                 <View>
@@ -127,7 +126,7 @@ export default Packs = ({ navigation, route }) => {
                     className="justify-center items-center"
                     activeOpacity={0.8}
                     style={{
-                      width: 330,
+                      width: Dimensions.get("window").width > 400 ? 380 : 330,
                       backgroundColor: "#008BEA",
                       borderRadius: 16,
                       height: 51,
@@ -146,32 +145,33 @@ export default Packs = ({ navigation, route }) => {
                       Purchase
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    className="bg-blue-700 justify-center items-center"
-                    activeOpacity={0.8}
-                    style={{
-                      width: 330,
-                      borderRadius: 16,
-                      height: 51,
-                      marginTop: 10,
-                    }}
-                    onPress={() => {
-                      navigation.navigate("Custom", {
-                        catid: catid,
-                      });
-                    }}
-                  >
-                    <Text
-                      className="text-white text-xl"
-                      style={{ fontFamily: "Poppins" }}
-                    >
-                      Create Custom
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               );
             }}
           />
+          <TouchableOpacity
+            className="bg-blue-700 justify-center self-center items-center"
+            activeOpacity={0.8}
+            style={{
+              width: Dimensions.get("window").width > 400 ? 380 : 330,
+              borderRadius: 16,
+              height: 51,
+              // marginTop: 10,
+              marginBottom: 20,
+            }}
+            onPress={() => {
+              navigation.navigate("Custom", {
+                catid: catid,
+              });
+            }}
+          >
+            <Text
+              className="text-white text-xl"
+              style={{ fontFamily: "Poppins" }}
+            >
+              Create Custom
+            </Text>
+          </TouchableOpacity>
         </SafeAreaView>
       )}
     </View>
@@ -183,12 +183,14 @@ const styles = StyleSheet.create({
     flex: 1,
     // paddingTop: StatusBar.currentHeight,
     backgroundColor: "#EFFFFD",
+    alignItems: "center",
   },
   flatContainer: {
-    width: 330,
-    height: "80%",
+    width: Dimensions.get("window").width > 400 ? 380 : 330,
+    // width: 330,
+    height: "87%",
     borderRadius: 20,
     backgroundColor: "#008BEA",
     marginBottom: 20,
-  }
+  },
 });

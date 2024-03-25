@@ -1,14 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Categories from '../screens/Categories';
 import HomePage from '../screens/HomePage';
-import CreateCustom from '../screens/CreateCustom';
-import Carouss from '../screens/Packhas'
 import Home from './styles/HomeStyle';
 import Profile from './styles/ProfileStyle';
 import Catego from './styles/CategoStyle';
-import Notification from './styles/NotificationStyle';
+import Notif from './styles/NotificationStyle';
 import Chat from './styles/ChatStyle';
 import Profil from '../screens/Pofile'
+import Notification from '../screens/Notification';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +18,7 @@ function BottomNav() {
       <Tab.Screen name="Profile" component={Profil} options={Profile}/>
       <Tab.Screen name="Categories" component={Categories} options={Catego}/>
       <Tab.Screen name="Home" component={HomePage} options={Home}/>
-      <Tab.Screen name="Notification" component={HomePage} options={Notification}/>
+      <Tab.Screen name="Notification" component={Notification} options={Notif}/>
       <Tab.Screen name="Chat" component={HomePage} options={Chat}/>
     </Tab.Navigator>
   );

@@ -10,6 +10,7 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import homepage from "../assets/homepage 1-1.png";
 import homepage2 from "../assets/50%off.png";
@@ -17,7 +18,7 @@ import imageData from "../functions/Categories";
 import About from "./About";
 
 const HomePage = ({ navigation }) => {
-  
+
   const Item = ({ image, title, id }) => (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight,
     // paddingHorizontal: 15,
+    height: Dimensions.get("screen").height,
     zIndex: 1,
   },
   item: {
@@ -107,12 +109,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: 240,
+    height: (Dimensions.get('window').width > 400) ? 270 : 240,
     width: Dimensions.get("screen").width,
   },
   image2: {
     marginTop: 50,
-    height: 180,
+    height: (Dimensions.get('window').width > 400) ? 200 : 180,
     borderRadius: 16,
     width: Dimensions.get("screen").width - 20,
   },

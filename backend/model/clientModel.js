@@ -35,6 +35,10 @@ const Client = sequelize.define('Client', {
   image: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  CIN: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   tableName: 'client',

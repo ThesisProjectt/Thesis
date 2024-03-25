@@ -161,7 +161,7 @@ const Request = ({ navigation, route }) => {
           />
 
           <View className="items-center mt-9">
-            <View className=" shadow-2xl p-6 bg-blue-400 flex-1 w-full h-52 rounded-2xl shadow-gray-500">
+            <View className=" shadow-xl p-5 bg-blue-400 flex-1 w-full h-48 rounded-xl shadow-gray-500">
               <View className="flex-1 flex-col">
                 <Text
                   className="text-md text-gray-700"

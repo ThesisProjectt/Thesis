@@ -3,7 +3,7 @@ const packRoute = require('../controller/paymentController')
 
 router.post('/payment',packRoute.Add)
 router.post('/verify/:id',packRoute.Verify)
-// router.get('/success',packRoute.success)
-// router.get('/fail',packRoute.fail)
+router.get('/success',packRoute.Success)
+router.get('/fail',packRoute.Fail)
 
 module.exports = router

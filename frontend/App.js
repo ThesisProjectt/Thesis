@@ -21,7 +21,11 @@ import Fail from './screens/Fail'
 import PackStyle from './components/styles/PackStyle';
 import CreatePack from './screens/CreatePack';
 import CreatePackServices from './screens/CreatePackServices';
+
+import PaymentScreen from './screens/PaymentScreen';
+
 import Packhas from './screens/Packhas';
+
 
 
 const Stack = createStackNavigator();
@@ -38,6 +42,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Packs" component={Packhas} options={PackStyle}/>
         <Stack.Screen name='BottomNav' component={BottomNav} options={{headerShown:false}}/>
@@ -48,11 +53,20 @@ export default function App() {
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
+
+        <Stack.Screen name='Custom Pack' component={CreatePack} options={RequestStyle}/>
+        <Stack.Screen name='Custom' component={CreatePackServices} options={RequestStyle}/>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
+         <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
+        <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
+        <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
+
         <Stack.Screen name='Custom Pack' component={CreatePack} options={PackStyle}/>
         <Stack.Screen name='Custom' component={CreatePackServices} options={PackStyle}/>
         <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
         <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
         <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

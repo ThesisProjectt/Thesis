@@ -2,7 +2,8 @@ import { View,Text,StyleSheet } from "react-native";
 import React, {useRef,useEffect} from "react";
 import LottieView from "lottie-react-native";
 
-export default Success = ()=>{
+
+export default Success = ({navigation})=>{
  
     return (
         <View  style={styles.container}>
@@ -12,7 +13,7 @@ export default Success = ()=>{
         loop={false}
         style={styles.animation}
       />
-      
+      <Text className="text-center" onPress={()=>{navigation.navigate("PaymentScreen")}}> Try Again </Text>
     </View>
     )
 }

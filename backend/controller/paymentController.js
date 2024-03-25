@@ -18,13 +18,13 @@ module.exports = {
             "accept_card": "true",
             "session_timeout_secs": 1200,
             "developer_tracking_id": process.env.FLOUCI_ID,
-            "success_link":"http://localhost:3000/api/success",
-            "fail_link":"http://localhost:3000/api/fail"
+            "success_link":"https://assets-global.website-files.com/629f4f1071598e2325b33b7f/64c26c1fae8773a006e188ff_Group%20231%20(1).png",
+            "fail_link":"http://localhost:3000"
         }
         console.log(payload,"payload");
         await axios.post(url,payload)
         .then((result)=>{
-            res.send(result.data)})
+            res.send({result:result.data,payload:payload})})
         .catch((e)=>  {console.log(e)})
         
     },
@@ -45,7 +45,21 @@ module.exports = {
         .catch(e=>console.log(e))
     },
 
-  
+  Success: (req,res) =>{
+    // const payment_id= req.params.id
+    // axios.get(`http://localhost:3000/success`)
+    // .then(res =>res.send("success") )
+    // .catch(err => console.log(err))
+    res.send("hello")
+  },
+
+  Fail: (req,res)=> {
+    
+    // axios.get(`http://localhost:3000`)
+    // .then(res=>res.send("fail"))
+    // .catch(err => console.log(err))
+    res.send("fail")
+  }
   
    
     

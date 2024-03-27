@@ -210,7 +210,7 @@ const ProfilePage = ({ navigation }) => {
           {editDetails ? (
             <TextInput
               className=" h-10 border border-gray-500 rounded-md px-3 mb-3"
-              value={CIN.toString()}
+              value={CIN?.toString()}
               onChangeText={setCIN}
               placeholder="CIN"
             />

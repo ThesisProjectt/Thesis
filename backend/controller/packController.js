@@ -63,6 +63,16 @@ module.exports = {
         res.json(found)
       }
       catch(error){console.log(error)}
+    },
+    fetchPack: async (req, res) => {
+      const id = req.params.id
+      try{
+        const pack = await db.getPack(id)
+        res.status(200).json(pack)
+      }
+      catch(err){
+        res.status(400).json(err)
+      }
     }
 }
 

@@ -2,6 +2,7 @@ import {View,Text, TextInput, Button,Linking, FlatList} from 'react-native'
 import axios from 'axios'
 import { useState } from 'react'
 import Success from './Success'
+import ip from '../functions/IpAdress'
 
 
 
@@ -27,7 +28,7 @@ const message="hi there"
 const [paymentId,setPaymentId]=useState({})
 
     const setPrice = async () =>{
-       await axios.post(`http://192.168.100.3:3000/api/payment`,{amount:amount})
+       await axios.post(`${ip}:3000/api/payment`,{amount:amount})
     
         .then((res)=>{ const {result} = res.data 
         Linking.openURL(result.result.link)

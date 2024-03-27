@@ -28,4 +28,8 @@ const Pack = sequelize.define('Pack', {
   timestamps: false
 });
 
-module.exports = {Pack};
+const getPack = (id) => {
+  return Pack.findByPk(id);
+}
+
+module.exports = {Pack, getPack};

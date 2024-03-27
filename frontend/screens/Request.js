@@ -164,32 +164,32 @@ const Request = ({ navigation, route }) => {
             <View className=" shadow-xl p-5 bg-blue-400 flex-1 w-full h-48 rounded-xl shadow-gray-500">
               <View className="flex-1 flex-col">
                 <Text
-                  className="text-md text-gray-700"
+                  className="text-base text-white"
                   style={{ fontFamily: "Poppins-Regular" }}
                 >
                   Your pack
                 </Text>
                 <Text
-                  className="text-xl text-gray-900 pl-2"
+                  className="text-xl text-white pl-2"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {name}
                 </Text>
                 <Text
-                  className="text-md text-gray-700 mt-3"
+                  className="text-base text-white mt-3"
                   style={{ fontFamily: "Poppins-Regular" }}
                 >
                   Your date
                 </Text>
                 <Text
-                  className="text-xl text-gray-900 pl-2"
+                  className="text-xl text-white pl-2"
                   style={{ fontFamily: "Poppins" }}
                 >
                   {selected || "No Date Selected"}
                 </Text>
               </View>
               <View className="flex-1 flex-col items-center w-32 mt-2 absolute right-3 bottom-3 bg-blue-600 shadow-lg shadow-slate-600 rounded-lg p-1">
-                <Ionicons name="locate-outline" size={32} color="#fff" />
+                <Ionicons name="locate-outline" size={25} color="#fff" />
                 <Text
                   className="text-xs text-white"
                   style={{ fontFamily: "Poppins" }}
@@ -204,7 +204,7 @@ const Request = ({ navigation, route }) => {
               onPress={handleSumbit}
             >
               <Text
-                className="text-xl text-yellow-50"
+                className="text-xl text-white"
                 style={{ fontFamily: "Poppins" }}
               >
                 C o n f i r m

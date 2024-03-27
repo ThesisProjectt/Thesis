@@ -13,10 +13,18 @@ const Notification = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     client_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    pack_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    }
   },
   {
     tableName: "notification",

@@ -23,5 +23,9 @@ const Mission = sequelize.define('Mission', {
   tableName: 'mission',
   timestamps: false
 });
+const getMission=()=>{
+  return Mission.findAll({})
+}
 
-module.exports = {Mission};
+
+module.exports = {Mission,getMission};

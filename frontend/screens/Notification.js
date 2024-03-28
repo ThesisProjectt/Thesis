@@ -223,6 +223,7 @@ export default function Notification({ navigation }) {
           </View>
         )}
       />
+      <View className="h-32"></View>
     </View>
   );
 }

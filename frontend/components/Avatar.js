@@ -28,7 +28,7 @@ export default function Avatar() {
   }, [])
 
   return (
-    <TouchableOpacity onPress={() => handleProfile()}>
+    <TouchableOpacity>
       <Image
         style={{ width: 45, height: 45, marginRight: 20, borderRadius: 30 }}
         source={image ? {uri: image} : require("../assets/human.png")} 

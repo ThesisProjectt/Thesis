@@ -1,7 +1,7 @@
 
 import { Image } from 'react-native';
 import Avatar from '../Avatar';
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import logo from "../../assets/LOGO Cleaning.png"
 
 export default Home = {
@@ -14,7 +14,6 @@ export default Home = {
     />
   ),
     headerRight: (props) => <Avatar {...props} />,
-    // headerTransparent: true,
     headerStyle: {
       height: 130,
       backgroundColor: "#EFFFFD",
@@ -27,6 +26,6 @@ export default Home = {
     headerTintColor: "gray",  
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="home-outline" color={color} size={30} style={{marginTop:5}}/>
+      <AntDesign name="home" color={color} size={30} style={{marginTop:5}}/>
     ),
   }

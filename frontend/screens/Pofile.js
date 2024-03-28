@@ -7,8 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ToastAndroid,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -59,7 +60,7 @@ const ProfilePage = ({ navigation }) => {
       };
       res = await axios.put(`${ip}:3000/client/updateclient/${id}`, obj);
       setR(!r);
-      alert("Update Successful!");
+      ToastAndroid.show("Profile updated successfully!", ToastAndroid.BOTTOM);
     } catch (err) {
       console.log(err);
     }
@@ -98,7 +99,7 @@ const ProfilePage = ({ navigation }) => {
         };
         res = await axios.put(`${ip}:3000/client/updateclient/${id}`, obj);
         setR(!r);
-        alert("image updated  Successful!");
+        ToastAndroid.show("image updated successfully!", ToastAndroid.BOTTOM);
       } catch (err) {
         console.log(err);
       }
@@ -167,7 +168,7 @@ const ProfilePage = ({ navigation }) => {
               placeholder="Name"
             />
           ) : (
-            <Text style={{ fontFamily: "Poppins-Regular" }} className=" mb-5">
+            <Text style={{ fontFamily: "Poppins-Regular" }} className=" left-3 mb-5">
               {userData.fullName}
             </Text>
           )}
@@ -183,7 +184,7 @@ const ProfilePage = ({ navigation }) => {
               placeholder="Email"
             />
           ) : (
-            <Text style={{ fontFamily: "Poppins-Regular" }} className=" mb-5">
+            <Text style={{ fontFamily: "Poppins-Regular" }} className="left-3 mb-5">
               {userData.email}
             </Text>
           )}
@@ -199,7 +200,7 @@ const ProfilePage = ({ navigation }) => {
               placeholder="Phone"
             />
           ) : (
-            <Text style={{ fontFamily: "Poppins-Regular" }} className=" mb-5">
+            <Text style={{ fontFamily: "Poppins-Regular" }} className="left-3 mb-5">
               {userData.phone}
             </Text>
           )}
@@ -215,7 +216,7 @@ const ProfilePage = ({ navigation }) => {
               placeholder="CIN"
             />
           ) : (
-            <Text style={{ fontFamily: "Poppins-Regular" }} className=" mb-5">
+            <Text style={{ fontFamily: "Poppins-Regular" }} className="left-3 mb-5">
               {userData.CIN}
             </Text>
           )}
@@ -231,7 +232,7 @@ const ProfilePage = ({ navigation }) => {
               placeholder="New Password"
             />
           ) : (
-            <Text className=" mb-5">***********</Text>
+            <Text className="left-3 mb-5">***********</Text>
           )}
           {editDetails ? (
             <Button
@@ -247,7 +248,7 @@ const ProfilePage = ({ navigation }) => {
 
         <View className="items-center justify-end">
           <TouchableOpacity
-            className="justify-center rounded-2xl items-center mt-2"
+            className="justify-center rounded-2xl items-center mt-2 flex-row"
             activeOpacity={0.8}
             style={{
               width: 330,
@@ -258,9 +259,9 @@ const ProfilePage = ({ navigation }) => {
               await AsyncStorage.clear();
               navigation.replace("Login");
             }}
-          >
+          ><Entypo name="log-out" size={24} color={'white'}/>
             <Text
-              className="text-white text-xl"
+              className="text-white text-xl ml-3"
               style={{ fontFamily: "Poppins" }}
             >
               Log out

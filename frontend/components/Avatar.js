@@ -36,7 +36,3 @@ export default function Avatar() {
     </TouchableOpacity>
   );
 }
-
-const handleProfile = async () => {
-  
-}

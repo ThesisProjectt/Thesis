@@ -23,6 +23,7 @@ import CreatePack from './screens/CreatePack';
 import CreatePackServices from './screens/CreatePackServices';
 import PaymentScreen from './screens/PaymentScreen';
 import Packhas from './screens/Packhas';
+import Feedback from './screens/Feedback';
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,7 @@ export default function App() {
         <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
         <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
+        <Stack.Screen name='Feedback' component={Feedback} options={RequestStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

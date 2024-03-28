@@ -102,7 +102,6 @@ const About = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ height: 100, backgroundColor: "#EFFFFD" }}></View>
     </ScrollView>
   );
 };

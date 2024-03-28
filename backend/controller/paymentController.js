@@ -1,52 +1,47 @@
 // const { verify } = require('jsonwebtoken')
-const db = require ('../model/paymentModel')
+const db = require("../model/paymentModel");
 
-const axios = require('axios')
-require("dotenv").config()
-
-
-
+const axios = require("axios");
+require("dotenv").config();
 
 module.exports = {
-    Add :
-    async (req,res)=> {
- 
-        const url = "https://developers.flouci.com/api/generate_payment"
-        const payload = 
-        {   "app_token": process.env.FLOUCI_PUBLIC_KEY,   
-            "app_secret": process.env.FLOUCI_SECRECT_KEY,
-            "amount": req.body.amount,
-            "accept_card": "true",
-            "session_timeout_secs": 1200,
-            "developer_tracking_id": process.env.FLOUCI_ID,
-            "success_link":"http://192.168.104.11:3000/api/success",
-            "fail_link":"http://192.168.104.11:3000/api/fail"
-        }
-        console.log(payload,"payload");
-        await axios.post(url,payload)
-        .then((result)=>{
-            res.send({result:result.data,payload:payload})})
-        .catch((e)=>  {console.log(e)})
-        
-    },
-    Verify : async  (req,res) => {
-    
-        const payment_id= req.params.id
-      await axios.get(`https://developers.flouci.com/api/verify_payment/${payment_id}`, {
-        headers : {
-            "Content-Type":"application/json",
-            'apppublic': process.env.FLOUCI_PUBLIC_KEY, 
-            'appsecret': process.env.FLOUCI_SECRECT_KEY
-          
-        }
-      }
-      )
-      .then((result)=>{
-        res.send(result.data)})
-        .catch(e=>console.log(e))
-    },
+  Add: async (req, res) => {
+    const url = "https://developers.flouci.com/api/generate_payment";
+    const payload = {
+      app_token: process.env.FLOUCI_PUBLIC_KEY,
+      app_secret: process.env.FLOUCI_SECRECT_KEY,
+      amount: req.body.amount,
+      accept_card: "true",
+      session_timeout_secs: 1200,
+      developer_tracking_id: process.env.FLOUCI_ID,
+      success_link: "http://192.168.11.152:3000/api/success",
+      fail_link: "http://192.168.11.152:3000/api/fail",
+    };
+    await axios
+      .post(url, payload)
+      .then((result) => {
+        res.send({ result: result.data, payload: payload });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
+  Verify: async (req, res) => {
+    const payment_id = req.params.id;
+    await axios.get(`https://developers.flouci.com/api/verify_payment/${payment_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          apppublic: process.env.FLOUCI_PUBLIC_KEY,
+          appsecret: process.env.FLOUCI_SECRECT_KEY,
+        },
+      })
+      .then((result) => {
+        res.send(result.data);
+      })
+      .catch((e) => console.log(e));
+  },
 
-  Success: (req,res) =>{
+  Success: (req, res) => {
     // res.send("hello")
     // res.sendFile(path.join(__dirname, '/index.html'));
     res.send(`
@@ -112,10 +107,10 @@ be in contact with more details shortly </p>
 
 </div> 
     </body> </html>
-`)
+`);
   },
 
-  Fail: (req,res)=> {
+  Fail: (req, res) => {
     res.send(`<div class="row justify-content-center">
     <div class="col-md-5">
         <div class="message-box _success _failed">
@@ -125,6 +120,6 @@ be in contact with more details shortly </p>
  
     </div> 
 </div> 
-</div> `)
-  }
-}
+</div> `);
+  },
+};

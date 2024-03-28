@@ -10,6 +10,7 @@ export default Success = ()=>{
       }, []);
     return (
         <View  style={styles.container}>
+          hello
       <LottieView
       ref={animation}
         source={require("../assets/animation/Payment.json")}

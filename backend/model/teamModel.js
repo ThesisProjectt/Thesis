@@ -19,4 +19,8 @@ const create=(obj)=>{
   return Team.create(obj)
 }
 
-module.exports = {Team,create};
+const findTeam=()=>{
+  return Team.findAll({})
+}
+
+module.exports = {Team,create,findTeam};

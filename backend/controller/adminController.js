@@ -28,7 +28,7 @@ const login = async (req, res) => {
       delete results.password;
       res.status(200).header("token", `${token}`).json({
           message: `Welcome ${results.name}`,
-          id: results.id
+          id: results.id,
         })
         
     } catch (err) {

@@ -13,15 +13,16 @@ function login() {
       return ("Please enter both email and password");
     }
     const data = { email: email, password: password };
-    console.log(data);
+ 
     try {
-      // await axios
-      //   .post("http://localhost:3000/client/login",data)
-      //   .then( () => {
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      await axios
+        .post("http://localhost:3000/admin/login",data)
+        .then( (res) => {
+          Cookies.set('user',res.data.id)
+                })
+        .catch((err) => {
+          console.log(err);
+        });
       
     } catch (err) {
       console.error(err);

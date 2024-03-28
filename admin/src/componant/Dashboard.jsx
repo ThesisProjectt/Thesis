@@ -4,19 +4,31 @@ import profil from "../assets/profil-icon.png";
 import notif from "../assets/notif.png";
 import search from "../assets/Search.png";
 import arrow from "../assets/arrow-down.png";
-import Chart from "./Charts";
-import AllRequests from "./Allrequest";
+import Home from "./Home";
+import Employeelist from "./Employeelist";
+import Clientlist from "./Clientlist";
+import Createteam from "./Createteam";
 function Dashboard() {
 
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const [view,setView]=useState('home');
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+  const render=()=>{
+    if (view==='employee') return <Employeelist/>;  
+    else if (view==='home') return <Home />;
+    else if (view==='clientlist') return <Clientlist />;
+    else if (view==="createteam")return <Createteam />
+  }
+  const changeView = (newView) => {
+    setView(newView);
+  };
+  
 
   return (
-    <div className="" style={{ backgroundColor: "#EFFFFD" }}>
+    <div  style={{   height:"100%" }}>
       <div className="container mx-auto px-4 py-8 max-w-8xl">
         <header className="flex justify-between items-center">
           <div>
@@ -59,82 +71,27 @@ function Dashboard() {
         <div className="flex mt-20">
           <div className="w-1/4 mr-8">
             <div className="bg-white rounded-md p-6 mb-8">
-              <button className="bg-teal-500 w-full text-white px-5 py-3 rounded-md hover:bg-teal-700">
+              <button className="bg-teal-500 w-full text-white px-5 py-3 rounded-md hover:bg-teal-700" onClick={()=>{
+                changeView('createteam')
+              }}>
                 Create a team
               </button>
             </div>
             <div className="bg-white rounded-md p-4 mb-8">
               <ul>
-                <li className="text-teal-500 font-bold p-2">Dashboard</li>
-                <li className="text-gray-700 p-2 hover:text-teal-500">Customer list</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">List of employees</li>
+                <li className="text-teal-500 font-bold p-2" onClick={()=>{changeView('home')}}>Dashboard</li>
+                <li className="text-gray-700 p-2 hover:text-teal-500" onClick={()=>{changeView('clientlist')}}>Customer list</li>
+                <li className="text-gray-700  p-2 hover:text-teal-500" onClick={()=>{changeView('employee')}}>List of employees</li>
                 <li className="text-gray-700  p-2 hover:text-teal-500">List of teams</li>
                 <li className="text-gray-700  p-2 hover:text-teal-500">Create Pack</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">Add service</li>
+                <li className="text-gray-700  p-2 hover:text-teal-500">Create Service</li>
+                <li className="text-gray-700  p-2 hover:text-teal-500">Create Category</li>
 
               </ul>
             </div>
           </div>
           <div className="w-full">
-            <div className=" flex w-full h-96 flex-cols gap-5">
-              <div className="w-2/4">
-                <Chart />
-              </div>
-              <div className="w-2/4">
-                <div className="bg-white w-full h-full rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <h2 className="font-bold p-5 text-xl">Teams</h2>
-                    <h3 className="p-5 text-cyan-600 font-semibold">See all</h3>
-                  </div>
-                  <div className="w-full grid gap-5 px-4">
-                    <div
-                      style={{ backgroundColor: "#ECF7FF" }}
-                      className="h-20  rounded-md"
-                    ></div>
-                    <div
-                      style={{ backgroundColor: "#ECF7FF" }}
-                      className="h-20  rounded-md"
-                    ></div>
-                    <div
-                      style={{ backgroundColor: "#ECF7FF" }}
-                      className="h-20  rounded-md"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex mt-10 gap-x-3 ">
-              <div className="flex-1 p-5 bg-white rounded-xl">
-                <div className=" font-semibold text-lg">Total Request</div>
-                <div className=" font-bold text-base text-blue-600 mt-2">
-                  100
-                </div>
-              </div>
-              <div className="flex-1 p-5 bg-white rounded-xl">
-                <div className=" font-semibold text-lg ">Total User</div>
-                <div className=" font-bold text-base text-blue-600 mt-2">
-                  50
-                </div>
-              </div>
-              <div className="flex-1 p-5 bg-white rounded-xl">
-                <div className=" font-semibold text-lg ">Total Team</div>
-                <div className=" font-bold text-base text-blue-600 mt-2">
-                  20
-                </div>
-              </div>
-              <div className="flex-1 p-5 bg-white rounded-xl">
-                <div className=" font-semibold text-lg ">Total Mission</div>
-                <div className=" font-bold text-base text-blue-600 mt-2">
-                  30
-                </div>
-              </div>
-            </div>
-            <div className="flex mt-4 bg-white rounded-lg p-5">
-              <h1 className=" text-lg font-medium">Recent Missions</h1>
-            </div>
-            <div className="mt-5">
-              <AllRequests />
-            </div>
+            {render()}
           </div>
         </div>
       </div>

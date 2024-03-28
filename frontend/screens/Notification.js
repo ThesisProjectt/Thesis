@@ -22,6 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
 import ip from "../functions/IpAdress";
 import Constants from "expo-constants";
+import * as WebBrowser from 'expo-web-browser';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -91,15 +92,14 @@ export default function Notification({ navigation }) {
     await axios(`${ip}:3000/pack/fetchpack/${id}`)
       .then(async (result) => {
         let amount = result.data.varying_price;
-        await axios
-          .post(`${ip}:3000/api/payment`, { amount: amount })
-          .then((res) => {
-            const { result } = res.data;
-            Linking.openURL(result.result.link);
-          })
-          .catch((error) => {
-            console.log(error, "error");
-          });
+        await axios.post(`${ip}:3000/api/payment`, { amount: amount })
+        .then(async (res) => {
+          const { result, path, payload } = res.data;
+          await WebBrowser.openBrowserAsync(result.result.link);
+        })
+        .catch((error) => {
+          console.log(error, "error");
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -204,7 +204,7 @@ export default function Notification({ navigation }) {
                       onPress={() =>
                         navigation.navigate("Request", {
                           packid: item.pack_id,
-                          name: item.name,
+                          name: 'Client Pack',
                         })
                       }
                       title="choose another date"

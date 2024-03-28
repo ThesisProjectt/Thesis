@@ -21,7 +21,7 @@ const rating=require('./router/ratingRoute')
 const admin=require('./router/adminRoute')
 const mission=require('./router/missionRoute')
 const payment = require('./router/paymentRoute')
-const mission=require('./router/missionRoute')
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded( { extended: true } ))

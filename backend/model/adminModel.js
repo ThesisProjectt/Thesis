@@ -23,8 +23,12 @@ const Admin = sequelize.define('Admin', {
   tableName: 'admin',
   timestamps: false
 });
-const getadmin=(obj)=>{
-  return Admin.findAll({where:{email:obj.email,password:obj.password}});
+const getadmin=()=>{
+  return Admin.findAll({});
+}
+const findOneadmin = (email) => {
+  return  Admin.findOne({where:{email}})
 }
 
-module.exports = {Admin,getadmin};
+
+module.exports = {Admin,getadmin,findOneadmin};

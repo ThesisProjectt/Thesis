@@ -1,6 +1,7 @@
 import { View,Text,StyleSheet, ScrollView} from "react-native";
 import { useState,useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ip from "../functions/IpAdress";
 
 
 export default CustomPack = ({route}) =>{
@@ -15,7 +16,7 @@ export default CustomPack = ({route}) =>{
       const fetchPacks = async (id) => {
 
         try {
-      const response = await fetch(`http://192.168.11.126:3000/pack/get/${id}`)
+      const response = await fetch(`${ip}:3000/pack/get/${id}`)
         const data = await response.json()
         const packid = await AsyncStorage.getItem("packid")
         .then ((res)=>{console.log(res,"res"),setIdPack(res)}) 

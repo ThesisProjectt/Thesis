@@ -13,6 +13,7 @@ import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/new pass.png";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import ip from "../functions/IpAdress";
 
 const Forget = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
@@ -53,7 +54,7 @@ const Forget = ({ navigation }) => {
         password: password,
       };
       if (isValidated) {
-        await axios.put("http://192.168.1.45:3000/client/newpwd", data);
+        await axios.put(`${ip}:3000/client/newpwd`, data);
         console.log("done");
         navigation.navigate("NewPwd");
       }

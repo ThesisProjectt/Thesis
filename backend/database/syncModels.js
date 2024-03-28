@@ -38,6 +38,7 @@ Service.belongsToMany(Pack, { through: PackHasServices , foreignKey:"service_id"
 Request.hasOne(Mission, {foreignKey:"request_id"});
 Request.hasOne(Payment, {foreignKey:"request_id"});
 
+Pack.hasOne(Notification, {foreignKey:"pack_id"})
 
 Employee.hasMany(Presence, {foreignKey: "employee_id"});
 

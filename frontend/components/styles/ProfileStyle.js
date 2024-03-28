@@ -6,7 +6,6 @@ export default Profile = {
     headerTitleAlign: "center", 
     headerLeft: false, 
     headerRight: (props) => <Avatar {...props} />,
-    // headerTransparent: true,
     headerStyle: {
         height: 130,
         backgroundColor: "#EFFFFD",

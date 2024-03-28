@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const client=require('../controller/clientController')
-// const {checkToken} = require("../middleware/authorization")
+const {checkToken} = require("../middleware/authorization")
 
 // router.use(checkToken)
 router.get('/getclient', client.getClient)

@@ -29,7 +29,7 @@ module.exports = {
 
       getServicebyCategory: async (req,res)=>{
         try {
-          const gotten = await db.Service.findAll({where:{category_id:req.body.category_id}})
+          const gotten = await db.Service.findAll({where:{category_id:req.params.id}})
           res.json(gotten)
         }
         catch(error){console.log("error")}

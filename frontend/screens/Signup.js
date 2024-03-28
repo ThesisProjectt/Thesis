@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
 import Loading from "../components/Loading";
+import ip from "../functions/IpAdress";
 
 const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
@@ -64,7 +65,7 @@ const Signup = ({ navigation }) => {
       };
       if (isValidated) {
         setLoading(true)
-        await axios.post("http://192.168.11.126:3000/client/signup", data)
+        await axios.post(`${ip}:3000/client/signup`, data)
         console.log('done')
         navigation.replace("Login")
       }

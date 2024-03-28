@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
+import ip from "../functions/IpAdress";
 
 const Login = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
@@ -24,14 +25,14 @@ const Login = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { 
     if (!email || !password) {
       return setError("Please enter both email and password");
     }
     const data = { email: email, password: password };
     try {
       setLoading(true)
-      await axios.post("http://192.168.11.126:3000/client/login", data)
+      await axios.post(`${ip}:3000/client/login`, data)
         .then(async (response) => {
           setError(null);
           const token = response.headers["token"];

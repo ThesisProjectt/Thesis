@@ -10,75 +10,89 @@ import {
   Linking,
   Button,
   LayoutAnimation,
+  RefreshControl,
 } from "react-native";
 // import notifee from '@notifee/react-native';
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useState, useEffect, useRef } from "react";
 import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
 import ip from "../functions/IpAdress";
+import Constants from "expo-constants";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function Notification({ navigation }) {
-    
-  const [notification, setNotification] = useState([]);
+  const [notif, setNotif] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [id, setId] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
   useEffect(() => {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
       await axios(`${ip}:3000/notification/getall/${user.id}`)
         .then((result) => {
-          setNotification(result.data);
+          setNotif(result.data);
+          setRefresh(false);
+          setExpanded(false);
         })
         .catch((err) => console.log(err));
     })();
-  }, []);
+    // This listener is fired whenever a remote notification becomes available in the background
+    // registerForPushNotificationsAsync().then((token) =>
+    //   setExpoPushToken(token)
+    // );
+
+    // notificationListener.current =
+    //   Notifications.addNotificationReceivedListener((notification) => {
+    //     setNotification(notification);
+    //   });
+
+    // responseListener.current =
+    //   Notifications.addNotificationResponseReceivedListener((response) => {
+    //     console.log(response);
+    //   });
+
+    // return () => {
+    //   Notifications.removeNotificationSubscription(
+    //     notificationListener.current
+    //   );
+    //   Notifications.removeNotificationSubscription(responseListener.current);
+    // };
+  }, [refresh]);
 
   const handleDelete = async () => {
     const user = JSON.parse(await AsyncStorage.getItem("user"));
     await axios
       .delete(`${ip}:3000/notification/delete/${user.id}`)
       .then(() => {
-        setNotification([]);
+        setNotif([]);
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-//   async function onDisplayNotification() {
-//     if (Platform.OS === "ios") {
-//       await notifee.requestPermission();
-//     }
-//     // Create a channel (required for Android)
-//     const channelId = await notifee.createChannel({
-//       id: "default",
-//       name: "Default Channel",
-//     });
-
-//     // Display a notification
-//     await notifee.displayNotification({
-//       title: "SPOTLESS",
-//       body: "Main body content of the notification",
-//       android: {
-//         channelId,
-//         smallIcon: "name-of-a-small-icon", // optional, defaults to 'ic_launcher'.
-//         // pressAction is needed if you want the notification to open the app when pressed
-//         pressAction: {
-//           id: "default",
-//         },
-//       },
-//     });
-//   }
-
   const pay = async (id) => {
     await axios(`${ip}:3000/pack/fetchpack/${id}`)
       .then(async (result) => {
         let amount = result.data.varying_price;
-        await axios.post(`${ip}:3000/api/payment`, { amount: amount })
+        await axios
+          .post(`${ip}:3000/api/payment`, { amount: amount })
           .then((res) => {
             const { result } = res.data;
             Linking.openURL(result.result.link);
@@ -100,7 +114,7 @@ export default function Notification({ navigation }) {
           className="flex-row gap-1"
           activeOpacity={0.4}
         >
-          <Ionicons name="remove-circle-outline" size={20} color={"gray"} />
+          <MaterialIcons name="clear" size={20} color={"gray"} />
           <Text
             className="text-gray-500"
             style={{ fontFamily: "Poppins-Regular" }}
@@ -110,14 +124,20 @@ export default function Notification({ navigation }) {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={notification}
+        data={notif}
+        refreshControl={
+          <RefreshControl
+            refreshing={refresh}
+            onRefresh={() => setRefresh(true)}
+          />
+        }
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View
             className="w-80 h-fit py-4 rounded-xl self-center my-2 justify-between items-center pl-3 shadow-lg shadow-slate-600 flex-row"
             style={{ backgroundColor: "#F4F4F4" }}
           >
-            {item.status === "denied" ? (
+            {item.status === "denied" && item.status !== "feedback" ? (
               <Ionicons
                 name="notifications-outline"
                 size={40}
@@ -136,6 +156,7 @@ export default function Notification({ navigation }) {
                 {item.message}
               </Text>
               <TouchableOpacity
+                className="flex-row space-x-2"
                 activeOpacity={0.4}
                 onPress={() => {
                   LayoutAnimation.configureNext(
@@ -155,6 +176,11 @@ export default function Notification({ navigation }) {
                 >
                   See details
                 </Text>
+                {expanded ? (
+                  <MaterialIcons name="expand-less" size={22} color={"gray"} />
+                ) : (
+                  <MaterialIcons name="expand-more" size={22} color={"gray"} />
+                )}
               </TouchableOpacity>
               <Text
                 style={{
@@ -173,7 +199,7 @@ export default function Notification({ navigation }) {
                       title="continue to purchase"
                       color={"#61D8D8"}
                     />
-                  ) : (
+                  ) : item.status === "denied" ? (
                     <Button
                       onPress={() =>
                         navigation.navigate("Request", {
@@ -181,8 +207,14 @@ export default function Notification({ navigation }) {
                           name: item.name,
                         })
                       }
-                      title="change date"
+                      title="choose another date"
                       color={"#B21212"}
+                    />
+                  ) : (
+                    <Button
+                      onPress={() => navigation.navigate("Feedback")}
+                      title="give feedback"
+                      color={"#61D8D8"}
                     />
                   )}
                 </View>
@@ -208,3 +240,40 @@ const styles = StyleSheet.create({
     color: "#02337B",
   },
 });
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Platform.OS === "android") {
+    await Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#FF231F7C",
+    });
+  }
+
+  if (Device.isDevice) {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!");
+      return;
+    }
+    token = (
+      await Notifications.getExpoPushTokenAsync({
+        projectId: Constants.expoConfig?.extra?.eas?.projectId,
+      })
+    ).data;
+    console.log(token);
+  } else {
+    alert("Must use physical device for Push Notifications");
+  }
+
+  return token;
+}

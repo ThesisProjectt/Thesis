@@ -1,11 +1,12 @@
 import Avatar from '../Avatar';
-import { Ionicons } from "@expo/vector-icons"; 
+import { Feather, Entypo } from "@expo/vector-icons"; 
 import logo from "../../assets/LOGO Cleaning.png"
 import { Image } from 'react-native';
 
-export default Notification = {
+export default Shopping = {
     headerShown:true, 
     headerTitleAlign: "center", 
+    headerLeft: false, 
     headerLeft: () => (
       <Image
         source={ logo }
@@ -14,7 +15,6 @@ export default Notification = {
     ),
     headerRight: (props) => <Avatar {...props} />,
     headerStyle: {
-        height: 130,
         backgroundColor: "#EFFFFD",
         height: 100,
         elevation: 0,
@@ -23,8 +23,11 @@ export default Notification = {
       fontFamily:'Poppins',
     },
     headerTintColor: "gray",
-    tabBarLabel: '', 
+    tabBarLabel: '',
+    tabBarStyle: {
+      borderTopWidth: 0,
+    },
     tabBarIcon: ({ color }) => (
-      <Ionicons name="notifications-outline" color={color} size={30} style={{marginTop:5}} />
+      <Feather name="shopping-bag" color={color} size={30} style={{marginTop:5}}/>
     ),
   }

@@ -5,9 +5,10 @@ import Home from './styles/HomeStyle';
 import Profile from './styles/ProfileStyle';
 import Catego from './styles/CategoStyle';
 import Notif from './styles/NotificationStyle';
-import Chat from './styles/ChatStyle';
+import Shopping from './styles/ShopStyle';
 import Profil from '../screens/Pofile'
 import Notification from '../screens/Notification';
+import Shop from '../screens/Shop';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,8 +19,8 @@ function BottomNav() {
       <Tab.Screen name="Profile" component={Profil} options={Profile}/>
       <Tab.Screen name="Categories" component={Categories} options={Catego}/>
       <Tab.Screen name="Home" component={HomePage} options={Home}/>
+      <Tab.Screen name="Shop" component={Shop} options={Shopping}/>
       <Tab.Screen name="Notification" component={Notification} options={Notif}/>
-      <Tab.Screen name="Chat" component={HomePage} options={Chat}/>
     </Tab.Navigator>
   );
 }

@@ -1,5 +1,5 @@
 import Avatar from "../Avatar";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { Image } from 'react-native';
 import logo from "../../assets/LOGO Cleaning.png"
 
@@ -13,7 +13,6 @@ export default Catego = {
     />
   ),
   headerRight: (props) => <Avatar {...props} />,
-    // headerTransparent: true,
     headerStyle: {
         backgroundColor: "#EFFFFD",
         height: 100,
@@ -25,8 +24,8 @@ export default Catego = {
   headerTintColor: "gray",
   tabBarLabel: "",
   tabBarIcon: ({ color }) => (
-    <Ionicons
-      name="apps-outline"
+    <AntDesign
+      name="appstore-o"
       color={color}
       size={30}
       style={{ marginTop: 5 }}

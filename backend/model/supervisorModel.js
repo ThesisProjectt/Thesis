@@ -27,4 +27,8 @@ const createsuper=(obj)=>{
   return Supervisor.create(obj)
 }
 
-module.exports = {Supervisor,createsuper};
+const findSuper=()=>{
+  return Supervisor.findAll({})
+}
+
+module.exports = {Supervisor,createsuper,findSuper};

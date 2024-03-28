@@ -23,4 +23,12 @@ const Mission = sequelize.define('Mission', {
   timestamps: false
 });
 
-module.exports = {Mission};
+const getMission = () =>{
+ return  Mission.findAll({})
+}
+
+const postMissions = (obj)=>{
+  return Mission.create(obj)
+}
+
+module.exports = {Mission,getMission,postMissions};

@@ -7,6 +7,16 @@ const create =async(req,res)=>{
             res.status(500).send(e)
         }
 }
+const find =async(req,res)=>{
+    try{
+        let supervisor = await db.findSuper()
+        res.json(supervisor)
+        }catch (e){     
+            res.status(500).send(e)
+        }
+}
+
+
 module.exports={
-    create
+    create,find
 }

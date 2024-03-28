@@ -26,8 +26,20 @@ try{
     res.status(500).send(err)
 }
 }
+
+
+const getbyTeamId = async (req,res)=>{
+    try {
+        const x = await db.getEmployee({where:{team_id:req.params.id}})
+    res.json(x)
+    }
+catch(err){
+    console.log(err,"employee ,err")
+}
+}
 module.exports={
     getEmployee,
     postEmployee,
-    updateEmployeeteam
+    updateEmployeeteam,
+    getbyTeamId
 }

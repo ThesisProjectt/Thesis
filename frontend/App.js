@@ -25,7 +25,7 @@ import PackStyle from './components/styles/PackStyle';
 import CreatePack from './screens/CreatePack';
 import CreatePackServices from './screens/CreatePackServices';
 import PaymentScreen from './screens/PaymentScreen';
-
+import Flouci from './screens/Flouci'
 
 const Stack = createStackNavigator();
 
@@ -42,6 +42,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
+        <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
+        <Stack.Screen name='Flouci' component={Flouci} options={{headerShown:false}}/>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
         <Stack.Screen name="Packs" component={Packs} options={PackStyle}/>       
@@ -56,9 +59,7 @@ export default function App() {
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
         <Stack.Screen name='Custom Pack' component={CreatePack} options={RequestStyle}/>
         <Stack.Screen name='Custom' component={CreatePackServices} options={RequestStyle}/>
-        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
          <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
-        <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
         <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

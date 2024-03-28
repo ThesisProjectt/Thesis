@@ -28,4 +28,10 @@ const getMission=()=>{
 }
 
 
-module.exports = {Mission,getMission};
+const postMissions = (obj)=>{
+  return Mission.create(obj)
+}
+
+module.exports = {Mission,getMission,postMissions};
+
+

@@ -9,6 +9,16 @@ const createteam=async(req,res)=>{
         res.status(500).send(err)
     }
 }
+
+const find = async (req,res)=>{
+    try{
+        const x=await db.findTeam()
+        res.json(x)
+    }
+    catch(err){
+        console.log(err,"team err")
+    }
+}
 module.exports={
-    createteam
+    createteam,find
 }

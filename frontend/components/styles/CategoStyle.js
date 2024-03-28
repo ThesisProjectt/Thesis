@@ -1,19 +1,18 @@
 import Avatar from "../Avatar";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { Image } from 'react-native';
+import logo from "../../assets/LOGO Cleaning.png"
 
-export default Cart = {
+export default Catego = {
   headerShown: true,
   headerTitleAlign: "center",
-  // headerLeft: () => (
-  //   <Ionicons
-  //     name="arrow-back-circle-outline"
-  //     size={40}
-  //     color={"gray"}
-  //     style={{ marginLeft: 20 }}
-  //   />
-  // ),
+  headerLeft: () => (
+    <Image
+      source={ logo }
+      style={{ width:40, height:40, marginLeft: 20}}
+    />
+  ),
   headerRight: (props) => <Avatar {...props} />,
-    // headerTransparent: true,
     headerStyle: {
         backgroundColor: "#EFFFFD",
         height: 100,
@@ -25,8 +24,8 @@ export default Cart = {
   headerTintColor: "gray",
   tabBarLabel: "",
   tabBarIcon: ({ color }) => (
-    <Ionicons
-      name="apps-outline"
+    <AntDesign
+      name="appstore-o"
       color={color}
       size={30}
       style={{ marginTop: 5 }}

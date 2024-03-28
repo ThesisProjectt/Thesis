@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
 const client = require('../controller/client');
+const { Pack } = require('./packModel');
 
 const Client = sequelize.define('Client', {
   id: {
@@ -35,6 +36,10 @@ const Client = sequelize.define('Client', {
   image: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  CIN: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   tableName: 'client',
@@ -62,7 +67,7 @@ const findImgClient = (id) => {
 }
 
 const getOneClient = (id) => {
-  return Client.findByPk(id)
+  return Client.findByPk(id, {include: [{model: Pack}]})
 }
 
 const update = (id, data) => {

@@ -4,7 +4,8 @@ const sequelize = require('../database/index');
 const Mission = sequelize.define('Mission', {
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   status: {
     type: DataTypes.STRING,
@@ -22,13 +23,15 @@ const Mission = sequelize.define('Mission', {
   tableName: 'mission',
   timestamps: false
 });
-
-const getMission = () =>{
- return  Mission.findAll({})
+const getMission=()=>{
+  return Mission.findAll({})
 }
+
 
 const postMissions = (obj)=>{
   return Mission.create(obj)
 }
 
 module.exports = {Mission,getMission,postMissions};
+
+

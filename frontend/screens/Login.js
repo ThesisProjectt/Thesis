@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { 
     if (!email || !password) {
       return setError("Please enter both email and password");
     }

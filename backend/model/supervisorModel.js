@@ -31,4 +31,8 @@ const findSuper=()=>{
   return Supervisor.findAll({})
 }
 
-module.exports = {Supervisor,createsuper,findSuper};
+const getsuper=(obj)=>{
+  return Supervisor.findAll({where:{email:obj.email,password:obj.password}});
+}
+
+module.exports = {Supervisor,createsuper,getsuper,findSuper};

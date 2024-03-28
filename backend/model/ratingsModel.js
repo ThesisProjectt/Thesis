@@ -26,4 +26,9 @@ const Rating = sequelize.define('Rating', {
 const getr =()=>{
   return Rating.findAll();
 }
-module.exports = {Rating,getr};
+
+const addRate = (data) => {
+  return Rating.create(data)
+}
+
+module.exports = {Rating ,getr ,addRate};

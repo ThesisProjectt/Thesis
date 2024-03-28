@@ -10,7 +10,6 @@ import Login from './screens/Login';
 import Forget from './screens/Forget';
 import NewPwd from './screens/NewPwd';
 import CreateCustom from './screens/CreateCustom';
-import Carouss from './screens/Packhas'
 import FirstScreen from "./screens/firstScreen";
 import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
@@ -25,7 +24,8 @@ import PackStyle from './components/styles/PackStyle';
 import CreatePack from './screens/CreatePack';
 import CreatePackServices from './screens/CreatePackServices';
 import PaymentScreen from './screens/PaymentScreen';
-import Flouci from './screens/Flouci'
+import Packhas from './screens/Packhas';
+import Feedback from './screens/Feedback';import Flouci from './screens/Flouci'
 
 const Stack = createStackNavigator();
 
@@ -41,7 +41,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        
+
         <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
         <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
         <Stack.Screen name='Flouci' component={Flouci} options={{headerShown:false}}/>
@@ -59,7 +59,7 @@ export default function App() {
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
         <Stack.Screen name='Custom Pack' component={CreatePack} options={RequestStyle}/>
         <Stack.Screen name='Custom' component={CreatePackServices} options={RequestStyle}/>
-         <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
+        <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

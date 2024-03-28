@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,14 +10,19 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  useWindowDimensions,
+  RefreshControl,
 } from "react-native";
 import homepage from "../assets/homepage 1-1.png";
 import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
 import About from "./About";
+import { AntDesign } from "@expo/vector-icons"; 
 
 const HomePage = ({ navigation }) => {
-  
+
+  const [refresh, setRefresh] = useState(false)
+
   const Item = ({ image, title, id }) => (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -36,7 +41,16 @@ const HomePage = ({ navigation }) => {
   );
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={refresh}
+          onRefresh={() => setRefresh(false)}
+        />
+      }
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+    >
       <View className="items-center justify-center">
         <Image source={homepage} style={styles.image} />
       </View>
@@ -87,7 +101,11 @@ const HomePage = ({ navigation }) => {
         About Us
       </Text>
       <About />
-      {/* <View style={{ height: 30, backgroundColor: "#EFFFFD" }}></View> */}
+      <View className=" flex-row items-center gap-1 my-9 self-center">
+        <AntDesign name="copyright" size={12} color={"gray"}/>
+        <Text style={{fontFamily:"Poppins-Light", color:"gray"}}>2023-2024 SPOTLESS, Inc.</Text>
+      </View>
+
     </ScrollView>
   );
 };
@@ -97,6 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight,
     // paddingHorizontal: 15,
+    height: Dimensions.get("screen").height,
     zIndex: 1,
   },
   item: {
@@ -107,12 +126,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: 240,
+    height: Dimensions.get("window").width > 400 ? 270 : 240,
     width: Dimensions.get("screen").width,
   },
   image2: {
     marginTop: 50,
-    height: 180,
+    height: Dimensions.get("window").width > 400 ? 200 : 180,
     borderRadius: 16,
     width: Dimensions.get("screen").width - 20,
   },

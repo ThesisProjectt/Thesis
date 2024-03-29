@@ -11,6 +11,10 @@ const Mission = sequelize.define('Mission', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  progress: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
   team_id: {
     type: DataTypes.INTEGER,
     allowNull: false

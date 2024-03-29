@@ -14,8 +14,8 @@ module.exports = {
       accept_card: "true",
       session_timeout_secs: 1200,
       developer_tracking_id: process.env.FLOUCI_ID,
-      success_link: "http://192.168.11.152:3000/api/success",
-      fail_link: "http://192.168.11.152:3000/api/fail",
+      success_link: "http://192.168.11.211:3000/api/success",
+      fail_link: "http://192.168.11.211:3000/api/fail",
     };
     await axios
       .post(url, payload)
@@ -28,7 +28,8 @@ module.exports = {
   },
   Verify: async (req, res) => {
     const payment_id = req.params.id;
-    await axios.get(`https://developers.flouci.com/api/verify_payment/${payment_id}`, {
+    await axios
+      .get(`https://developers.flouci.com/api/verify_payment/${payment_id}`, {
         headers: {
           "Content-Type": "application/json",
           apppublic: process.env.FLOUCI_PUBLIC_KEY,
@@ -54,40 +55,40 @@ module.exports = {
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />   
     </head>
     <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0;">
-       <script> 
-       ._failed{ border-bottom: solid 4px red !important; }
-._failed i{  color:red !important;  }
+       <style> 
+        ._failed{ border-bottom: solid 4px red !important; }
+        ._failed i{  color:red !important;  }
 
-._success {
-    box-shadow: 0 15px 25px #00000019;
-    padding: 45px;
-    width: 100%;
-    text-align: center;
-    margin: 40px auto;
-    border-bottom: solid 4px #28a745;
+        ._success {
+        box-shadow: 0 15px 25px #00000019;
+        padding: 45px;
+        width: 100%;
+        text-align: center;
+        margin: 40px auto;
+        border-bottom: solid 4px #28a745;
 }
 
-._success i {
-    font-size: 55px;
-    color: #28a745;
-}
+    ._success i {
+        font-size: 55px;
+        color: #28a745;
+    }
 
-._success h2 {
-    margin-bottom: 12px;
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 1.2;
-    margin-top: 10px;
-}
+    ._success h2 {
+        margin-bottom: 12px;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1.2;
+        margin-top: 10px;
+    }
 
-._success p {
-    margin-bottom: 0px;
-    font-size: 18px;
-    color: #495057;
-    font-weight: 500;
-}
+    ._success p {
+        margin-bottom: 0px;
+        font-size: 18px;
+        color: #495057;
+        font-weight: 500;
+    }
        
-       </script>
+       </style>
 
     <div class="container">
     <div class="row justify-content-center">

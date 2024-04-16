@@ -14,12 +14,11 @@ import ip from "../functions/IpAdress";
 export default function Catego({ navigation }) {
 
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async()=>{
       try {
-        setLoading(true);
         const response = await fetch(`${ip}:3000/category/getCategories`);
         const data = await response.json();
         setCategories(data);

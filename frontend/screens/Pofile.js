@@ -15,6 +15,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ip from "../functions/IpAdress";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Avatar from "../components/Avatar";
 
 const ProfilePage = ({ navigation }) => {
   const [editImage, setEditImage] = useState(false);
@@ -86,7 +87,7 @@ const ProfilePage = ({ navigation }) => {
       quality: 1,
     });
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       console.log(result.assets[0].uri);
       try {
         const obj = {
@@ -100,6 +101,7 @@ const ProfilePage = ({ navigation }) => {
         res = await axios.put(`${ip}:3000/client/updateclient/${id}`, obj);
         setR(!r);
         ToastAndroid.show("image updated successfully!", ToastAndroid.BOTTOM);
+        AsyncStorage.setItem("refresh", JSON.stringify(r));
       } catch (err) {
         console.log(err);
       }

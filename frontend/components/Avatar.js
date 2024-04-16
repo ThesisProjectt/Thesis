@@ -7,6 +7,7 @@ import ip from "../functions/IpAdress";
 export default function Avatar() {
 
   const [image, setImage] = useState("");
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(()=>{
     (async () => {
@@ -25,7 +26,7 @@ export default function Avatar() {
         console.log(err);
       }
     })()
-  }, [])
+  }, [AsyncStorage.getItem("refresh")])
 
   return (
     <TouchableOpacity>

@@ -14,8 +14,8 @@ module.exports = {
       accept_card: "true",
       session_timeout_secs: 1200,
       developer_tracking_id: process.env.FLOUCI_ID,
-      success_link: "http://192.168.11.211:3000/api/success",
-      fail_link: "http://192.168.11.211:3000/api/fail",
+      success_link: "http://192.168.1.45:3000/api/success",
+      fail_link: "http://192.168.1.45:3000/api/fail",
     };
     await axios
       .post(url, payload)

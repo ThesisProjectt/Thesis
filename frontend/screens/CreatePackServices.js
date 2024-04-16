@@ -13,6 +13,7 @@ import axios from "axios";
 import ip from "../functions/IpAdress";
 import Loading from "../components/Loading";
 import Checkbox from "expo-checkbox";
+import IncDecCounter from "../components/IncDec";
 
 const CreatePackServices = ({ navigation, route }) => {
   const { catid } = route.params;
@@ -41,12 +42,15 @@ const CreatePackServices = ({ navigation, route }) => {
       <View className="bg-white p-3 items-center justify-center rounded-xl w-11 h-11 shadow-sm ml-1 shadow-black">
         <Image src={image} style={{ width: 33, height: 33 }} />
       </View>
-      <Text
-        style={{ fontFamily: "Poppins-Regular",}}
-        className=" text-blue-800 text-lg landscape: bg-white   w-8/12 p-2 mx-2 rounded-xl shadow-sm shadow-black"
-      >
-        {name}
-      </Text>
+      <View className="bg-white w-8/12 p-2 mx-2 rounded-xl shadow-sm shadow-black flex-row justify-between">
+        <Text
+          style={{ fontFamily: "Poppins-Regular" }}
+          className=" text-blue-800 text-base landscape: w-8/12"
+        >
+          {name}
+        </Text>
+        <IncDecCounter price={price} setTotal={setTotal}/>
+      </View>
       <View className="bg-white p-3 rounded-xl shadow-sm shadow-black">
         <Checkbox
           color={"#02337B"}
@@ -59,10 +63,10 @@ const CreatePackServices = ({ navigation, route }) => {
 
   const handleSelectItem = (id, price) => {
     if (selectedItems.includes(id)) {
-      setTotal(total - price);
+      setTotal((prev) => prev - price);
       selectedItems.splice(selectedItems.indexOf(id), 1);
     } else {
-      setTotal(total + price);
+      setTotal((prev) => prev + price);
       setSelectedItems([...selectedItems, id]);
     }
   };
@@ -102,24 +106,23 @@ const CreatePackServices = ({ navigation, route }) => {
               keyExtractor={(item) => item.id}
             />
             <View className="self-center">
-
-            <View
-              style={{ width: "95%" }}
-              className="text-blue-800 text-base flex-row justify-between bg-white p-2 rounded-xl shadow-sm shadow-black"
-            >
-              <Text
-                style={{ fontFamily: "Poppins" }}
-                className="text-blue-800 text-base"
+              <View
+                style={{ width: "95%" }}
+                className="text-blue-800 text-base flex-row justify-between bg-white p-2 rounded-xl shadow-sm shadow-black"
               >
-                Total:
-              </Text>
-              <Text
-                style={{ fontFamily: "Poppins" }}
-                className="text-blue-800 text-base"
-              >
-                {total} $
-              </Text>
-            </View>
+                <Text
+                  style={{ fontFamily: "Poppins" }}
+                  className="text-blue-800 text-base"
+                >
+                  Total:
+                </Text>
+                <Text
+                  style={{ fontFamily: "Poppins" }}
+                  className="text-blue-800 text-base"
+                >
+                  {total} $
+                </Text>
+              </View>
             </View>
           </View>
           <View className="items-center flex-1 justify-end mb-5 gap-2">
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     backgroundColor: "#EFFFFD",
     alignItems: "center",
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
   flatContainer2: {
     display: "flex",

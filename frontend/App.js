@@ -9,7 +9,6 @@ import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Forget from './screens/Forget';
 import NewPwd from './screens/NewPwd';
-import CreateCustom from './screens/CreateCustom';
 import FirstScreen from "./screens/firstScreen";
 import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
@@ -32,7 +31,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
 
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({ 
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
     'Poppins-Regular':require('./assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Light':require('./assets/fonts/Poppins-Light.ttf')
@@ -50,7 +49,6 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
         <Stack.Screen name='Forget' component={Forget} options={{headerShown:false}}/>
         <Stack.Screen name='NewPwd' component={NewPwd} options={{headerShown:false}}/>
-        <Stack.Screen name="CreateCustom" component={CreateCustom}/>
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>

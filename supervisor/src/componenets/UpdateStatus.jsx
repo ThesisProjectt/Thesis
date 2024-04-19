@@ -1,21 +1,35 @@
 import React, { useState } from 'react';
 import profil from '../assets/profil-icon.png';
+import NavBar from './NavBar';
+import SideBar from './SideBar';
+import MissionSide from './MissionSide';
+import axios from 'axios'
+import backgroundImage from "../assets/background2.png";
 
-function UpdateStatus() {
-  const [status, setStatus] = useState('Present'); // Default status is 'Present'
+function UpdateStatus(props) {
+  const [status, setStatus] = useState('Present'); 
 
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="bg-white rounded-lg p-4 mb-4 shadow-md">
+    <div className="bg-teal-100 min-h-screen flex flex-grow justify-between items-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="container  mx-auto px-2 py-8 w-full flex-1">
+    <NavBar changeView={props.changeView}/>
+      <div className="flex space-x-4 mt-7">
+      <SideBar changeView={props.changeView}/>
+      <div class="bg-white p-8 rounded-md w-full">
+	
+      <div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+        
+          <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
         <table className="w-full">
           <thead>
             <tr>
               <th className="px-4 py-2">Employee Name</th>
-              <th className="px-4 py-2">Status</th> {/* Moved the Status label here */}
+              <th className="px-4 py-2">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +40,7 @@ function UpdateStatus() {
                   employee name
                 </div>
               </td>
-              <td className="border px-4 py-2"> {/* Adjusted styles for the second column */}
+              <td className="border px-4 py-2">
                 <div className="relative">
                   <select
                     value={status}
@@ -54,8 +68,18 @@ function UpdateStatus() {
             </tr>
           </tbody>
         </table>
+        <div  className="flex justify-end">
+        <button onClick={()=>{props.changeView("Presence")}} className="py-2 px-8 bg-teal-500 text-white rounded hover:bg-teal-600">confirm</button>
+        </div>
+        </div>
+          </div>
+        </div>
       </div>
     </div>
+    <MissionSide changeView={props.changeView} data={props.data}/>
+        </div>
+      </div>
+    
   );
 }
 

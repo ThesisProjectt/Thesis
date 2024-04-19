@@ -11,6 +11,10 @@ const Mission = sequelize.define('Mission', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  progress: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
   team_id: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -18,23 +22,40 @@ const Mission = sequelize.define('Mission', {
   request_id: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  progress: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
   }
 }, {
   tableName: 'mission',
   timestamps: false
 });
+// add s to getMission  there is 2 gtemission
 const getMission=()=>{
   return Mission.findAll({})
 }
-const getmissionforsupper=()=>{
-  
-}
+
+
 
 const postMissions = (obj)=>{
   return Mission.create(obj)
 }
 const create=(data) =>{ return Mission.create(data)};
 
-module.exports = {Mission,getMission,postMissions,create};
+
+const getMission=(id)=>{
+  return Mission.findAll({ where: { team_id: id } })
+}
+const getAllMission=(id)=>{
+  return Mission.findAll({ where: { team_id: id } })
+}
+const updateMission=(data,id)=>{
+  return Mission.update(data,{where: {id:id}})
+}
+
+module.exports = {Mission,getMission,updateMission,getAllMission,postMissions,create}
+
+
 
 

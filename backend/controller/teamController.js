@@ -10,6 +10,16 @@ const createteam=async(req,res)=>{
     }
 }
 
+
+const getAllTeam = async (req, res) => {
+    const idTeam=req.params.id
+    try{
+        const x = await db.findTeam(idTeam);
+        res.status(200).json(x)
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 const find = async (req,res)=>{
     try{
         const x=await db.findTeam()
@@ -19,6 +29,7 @@ const find = async (req,res)=>{
         console.log(err,"team err")
     }
 }
+
 const teamwithoutmission=async(req,res)=>{
   try{
     const d=req.body.date
@@ -41,5 +52,6 @@ const getteam=async(req,res)=>{
 module.exports={
     createteam,find,
     teamwithoutmission,
-    getteam
+    getteam,getAllTeam
 }
+

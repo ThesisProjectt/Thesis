@@ -1,9 +1,13 @@
 const db = require("../model/notificationModel");
+const {io} = require('../middleware/Socket')
 
 const create = async (req, res) => {
   try {
     const x = await db.createnot(req.body);
     res.status(201).json(x);
+    io.on('connection', (socket) => {
+      socket.emit('user','notif')
+    })
   } catch (e) {
     res.status(500).send(e);
   }

@@ -1,7 +1,12 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
+
 const mission=require("./missionModel");
 const request=require('./requestModel')
+
+const employee=require('./employeeModel')
+
+
 const Team = sequelize.define('Team', {
   id: {
     type: DataTypes.INTEGER,
@@ -38,8 +43,18 @@ const getteam=()=>{
   return Team.findAll({});
 }
 
-const findTeam=()=>{
-  return Team.findAll({})
-}
+
+const findTeam =(id =>{
+  return Team.findAll({
+    where:{supervisor_id:id},
+    include:[
+      {
+        model: employee.Employee,
+      }
+    ]
+  })
+})
+
+
 
 module.exports = {Team,create,findTeam,teamwithoutmission,getteam};

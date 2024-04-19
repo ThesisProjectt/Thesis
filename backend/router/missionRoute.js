@@ -7,5 +7,5 @@ router.get('/getmission',c.getAll)
 router.get('/getMission/:id',c.find)
 // router.post('/postmission',c.create)
 router.get('/getmission/:id',c.find)
-
+router.put('/update/:id',c.update)
 module.exports= router

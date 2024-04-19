@@ -21,7 +21,7 @@ export const Item_Width = Math.round(Slider_Width * 0.85);
 
 export default Packs = ({ navigation, route }) => {
   const { catid, catName } = route.params;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [packs, setPacks] = useState([]);
   const [total, setTotal] = useState(0);
   const [index, setIndex] = useState();
@@ -30,7 +30,6 @@ export default Packs = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         const response = await fetch(`${ip}:3000/pack/get/${catid}`);
         const data = await response.json();
         const filteredData = data.filter(

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
+import Categories from './screens/Categories';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Forget from './screens/Forget';
@@ -24,12 +25,13 @@ import CreatePackServices from './screens/CreatePackServices';
 import PaymentScreen from './screens/PaymentScreen';
 import Packhas from './screens/Packhas';
 import Feedback from './screens/Feedback';
+import Flouci from './screens/Flouci'
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({ 
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
     'Poppins-Regular':require('./assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Light':require('./assets/fonts/Poppins-Light.ttf')
@@ -39,9 +41,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Packs" component={Packhas} options={PackStyle}/>
+        <Stack.Screen name='Categories' component={Categories} options={{headerShown:false}}/> 
+        <Stack.Screen name="Packs" component={Packhas} options={PackStyle}/>       
         <Stack.Screen name='BottomNav' component={BottomNav} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
@@ -52,9 +54,10 @@ export default function App() {
         <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
         <Stack.Screen name='Custom Pack' component={CreatePack} options={RequestStyle}/>
         <Stack.Screen name='Custom' component={CreatePackServices} options={RequestStyle}/>
-        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
         <Stack.Screen name='PaymentScreen' component={PaymentScreen} options={{headerShown:false}}/>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
         <Stack.Screen name='Success' component={Success} options={{headerShown:false}}/>
+        <Stack.Screen name='Flouci' component={Flouci} options={{headerShown:false}}/>
         <Stack.Screen name='Fail' component={Fail} options={{headerShown:false}}/>
         <Stack.Screen name='Feedback' component={Feedback} options={RequestStyle}/>
       </Stack.Navigator>

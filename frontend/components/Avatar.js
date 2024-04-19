@@ -7,6 +7,7 @@ import ip from "../functions/IpAdress";
 export default function Avatar() {
 
   const [image, setImage] = useState("");
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(()=>{
     (async () => {
@@ -25,10 +26,10 @@ export default function Avatar() {
         console.log(err);
       }
     })()
-  }, [])
+  }, [AsyncStorage.getItem("refresh")])
 
   return (
-    <TouchableOpacity onPress={() => handleProfile()}>
+    <TouchableOpacity>
       <Image
         style={{ width: 45, height: 45, marginRight: 20, borderRadius: 30 }}
         source={image ? {uri: image} : require("../assets/human.png")} 

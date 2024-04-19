@@ -20,6 +20,7 @@ const create=(obj)=>{
   return Team.create(obj)
 }
 
+
 const findTeam =(id =>{
   return Team.findAll({
     where:{supervisor_id:id},
@@ -30,5 +31,7 @@ const findTeam =(id =>{
     ]
   })
 })
+
+
 
 module.exports = {Team,create,findTeam};

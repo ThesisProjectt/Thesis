@@ -32,6 +32,10 @@ const createsuper=(obj)=>{
   return Supervisor.create(obj)
 }
 
+const findSuper=()=>{
+  return Supervisor.findAll({})
+}
+
 const getsuper=(obj)=>{
   return Supervisor.findAll({where:{email:obj.email,password:obj.password}});
 }
@@ -148,4 +152,6 @@ const suppermission = async (id) => {
 return supp
 }
 
+
 module.exports = {Supervisor,createsuper,getsuper,service,findOnesupervisor,supervisormission,suppermission};
+

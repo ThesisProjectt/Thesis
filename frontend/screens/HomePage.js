@@ -105,7 +105,6 @@ const HomePage = ({ navigation }) => {
         <AntDesign name="copyright" size={12} color={"gray"}/>
         <Text style={{fontFamily:"Poppins-Light", color:"gray"}}>2023-2024 SPOTLESS, Inc.</Text>
       </View>
-
     </ScrollView>
   );
 };

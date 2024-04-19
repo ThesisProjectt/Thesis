@@ -21,16 +21,15 @@ export const Item_Width = Math.round(Slider_Width * 0.85);
 
 export default Packs = ({ navigation, route }) => {
   const { catid, catName } = route.params;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [packs, setPacks] = useState([]);
   const [total, setTotal] = useState(0);
   const [index, setIndex] = useState();
   const isCarousel = useRef(null);
-console.log(Dimensions.get("window").width)
+
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         const response = await fetch(`${ip}:3000/pack/get/${catid}`);
         const data = await response.json();
         const filteredData = data.filter(
@@ -108,14 +107,6 @@ console.log(Dimensions.get("window").width)
                             >
                               {`${ele.name}`}
                             </Text>
-                            {/* <Text
-                            className="text-white text-lg font-bold"
-                            style={{ fontFamily: "Poppins" }}
-                          >
-                            {ele.PackHasServices.quantity == null
-                              ? ""
-                              : `\u2022 ${ele.PackHasServices.quantity}`}
-                          </Text> */}
                           </View>
                         );
                       })}
@@ -181,13 +172,11 @@ console.log(Dimensions.get("window").width)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: StatusBar.currentHeight,
     backgroundColor: "#EFFFFD",
     alignItems: "center",
   },
   flatContainer: {
     width: Dimensions.get("window").width > 400 ? 380 : 330,
-    // width: 330,
     height: "87%",
     borderRadius: 20,
     backgroundColor: "#008BEA",

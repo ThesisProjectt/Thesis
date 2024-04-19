@@ -1,8 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
 import backgroundImage from "../assets/background1.png";
 import logo from "../assets/logo.png";
+import Cookies from 'js-cookie';
+import axios from "axios";
 
-function Home() {
+function Home(props) {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const log = async () => {
+    if (email==="" || password==="") {
+      return ("Please enter both email and password");
+    }
+    const data = { email: email, password: password };
+ 
+    try {
+      await axios
+        .post("http://localhost:3000/supervisor/login",data)
+        .then( (res) => {
+          Cookies.set('user',res.data.id)
+          props.setState(true)
+          props.changeView("Dashboard")
+                })
+        .catch((err) => {
+          console.log(err);
+        });
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div
       className="bg-cover bg-center bg-fixed h-screen"
@@ -43,6 +71,7 @@ function Home() {
               backgroundColor: "white", // Set background color to white
               color: "gray", // Set text color to black
             }}
+            onChange={(e)=>{setEmail(e.target.value)}}
           />
           <input
             type="password"
@@ -57,6 +86,7 @@ function Home() {
               backgroundColor: "white", // Set background color to white
               color: "black", // Set text color to black
             }}
+            onChange={(e)=>{setPassword(e.target.value)}}
           />
           <button
             style={{
@@ -70,6 +100,7 @@ function Home() {
               fontWeight: "bold",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
+            onClick={()=>{log()}}
           >
             Sign In
           </button>

@@ -1,0 +1,55 @@
+const db=require('../model/missionModel')
+const {Employee}=require('../model/employeeModel')
+const {PHS}=require('../model/packHasServicesModel')
+const getAll = async (req, res) => {
+    try{
+        const x = await db.getMission();
+        res.status(200).json(x)
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
+
+const create = async (req,res)=>{
+    try {
+        const x = await db.postMissions(req.body)
+        res.json(x)
+    }
+    catch(err){console.log(err,"mission err")}
+}
+
+const find= async(req,res)=>{
+    try {
+      const found = await db.getMission({ where:
+
+        {
+          team_id:req.params.id
+        } 
+      })
+      res.json(found)
+    }
+    catch(error){console.log(error)}
+  }
+
+  const findd = async(req,res)=>{
+    try {
+      const found = await db.getMission({
+        include: [{
+          model: PHS,
+          where:{pack_id:req.params.id},
+          through:{attributes:[]},
+        }]
+      })
+      res.json(found)
+    }
+    catch(error){console.log(error)}
+  }
+
+
+
+
+
+
+module.exports={
+    getAll,find,create,findd
+}

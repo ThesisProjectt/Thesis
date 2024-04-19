@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
+const employee=require('./employeeModel')
 
 const Team = sequelize.define('Team', {
   id: {
@@ -19,4 +20,15 @@ const create=(obj)=>{
   return Team.create(obj)
 }
 
-module.exports = {Team,create};
+const findTeam =(id =>{
+  return Team.findAll({
+    where:{supervisor_id:id},
+    include:[
+      {
+        model: employee.Employee,
+      }
+    ]
+  })
+})
+
+module.exports = {Team,create,findTeam};

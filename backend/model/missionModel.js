@@ -18,14 +18,25 @@ const Mission = sequelize.define('Mission', {
   request_id: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  progress: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
   }
 }, {
   tableName: 'mission',
   timestamps: false
 });
-const getMission=()=>{
-  return Mission.findAll({})
+
+
+const getMission=(id)=>{
+  return Mission.findAll({ where: { team_id: id } })
+}
+const getAllMission=(id)=>{
+  return Mission.findAll({ where: { team_id: id } })
+}
+const updateMission=(data,id)=>{
+  return Mission.update(data,{where: {id:id}})
 }
 
-
-module.exports = {Mission,getMission};
+module.exports = {Mission,getMission,updateMission,getAllMission};

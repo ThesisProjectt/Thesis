@@ -2,7 +2,10 @@ import React, { useState,useEffect } from 'react'
 import profil from '../assets/profil-icon.png';
 import trash from '../assets/trash.png';
 import axios from 'axios'
-
+import NavBar from './NavBar';
+import SideBar from './SideBar';
+import MissionSide from './MissionSide';
+import backgroundImage from "../assets/background2.png";
 
 function AllClients(props) {
   const [status, setStatus] = useState('Completed');
@@ -18,6 +21,11 @@ function AllClients(props) {
   }, [])
 
     return (
+		<div className="bg-teal-100 min-h-screen flex flex-grow justify-between items-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="container mx-auto px-2 py-8 w-full flex-1">
+    <NavBar changeView={props.changeView}/>
+      <div className="flex space-x-4 mt-7">
+      <SideBar changeView={props.changeView}/>
       <div class="bg-white p-8 rounded-md w-full">
 	
 		<div>
@@ -87,6 +95,10 @@ function AllClients(props) {
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<MissionSide changeView={props.changeView} data={props.data}/>
+	</div>
 		</div>
 	</div>
     )

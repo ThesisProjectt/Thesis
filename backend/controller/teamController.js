@@ -10,6 +10,16 @@ const createteam=async(req,res)=>{
     }
 }
 
+
+const getAllTeam = async (req, res) => {
+    const idTeam=req.params.id
+    try{
+        const x = await db.findTeam(idTeam);
+        res.status(200).json(x)
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 const find = async (req,res)=>{
     try{
         const x=await db.findTeam()
@@ -19,6 +29,6 @@ const find = async (req,res)=>{
         console.log(err,"team err")
     }
 }
+
 module.exports={
-    createteam,find
-}
+    createteam,getAllTeam, find }

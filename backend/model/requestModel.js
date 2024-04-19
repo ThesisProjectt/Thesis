@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
-
+const mission =require('./missionModel')
+const client=require('./clientModel')
 const Request = sequelize.define('Request', {
   id: {
     type: DataTypes.INTEGER,
@@ -33,5 +34,18 @@ const createreq=(obj)=>{
 const getrequest=()=>{
   return Request.findAll({})
 }
-
-module.exports = {Request,createreq,getrequest};
+const getonlyrequest=()=>{
+  return Request.findAll({
+    where: {
+      '$Mission.request_id$': null
+    },
+    include: [{
+      model: mission.Mission,
+      required: false, 
+    },
+  ]
+  })
+}
+const deleted=(id)=>{
+  return Request.destroy({where:{id:id}})}
+module.exports = {Request,createreq,getrequest,getonlyrequest,deleted};

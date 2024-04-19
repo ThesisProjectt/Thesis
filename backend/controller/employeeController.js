@@ -8,6 +8,15 @@ const getEmployee=async(req,res)=>{
         res.status(500).send(err)
     }
 }
+const getEmployeefree=async(req,res)=> {
+    try{
+        const x=await db.getEmployeefree();
+        res.status(201).json(x);
+    }catch(err){
+        console.log("Error in getting Employee", err);
+        res.status(500).send(err)
+    }
+}
 const postEmployee=async(req,res)=>{
     try{
         const x=await db.createEmployee(req.body)
@@ -41,5 +50,6 @@ module.exports={
     getEmployee,
     postEmployee,
     updateEmployeeteam,
-    getbyTeamId
+    getbyTeamId,
+    getEmployeefree
 }

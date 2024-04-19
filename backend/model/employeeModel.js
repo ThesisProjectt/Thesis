@@ -18,6 +18,9 @@ const Employee = sequelize.define('Employee', {
 const getEmployee=()=>{
   return Employee.findAll({})
 }
+const getEmployeefree=()=>{
+  return Employee.findAll({where:{team_id:null}})
+}
 const createEmployee=(obj)=>{
   return Employee.create(obj)
 }
@@ -27,4 +30,4 @@ const updateEmpoyeeteam=(obj,id)=> {
 
 
 
-module.exports = {Employee,getEmployee,createEmployee,updateEmpoyeeteam};
+module.exports = {Employee,getEmployee,createEmployee,updateEmpoyeeteam,getEmployeefree};

@@ -1,6 +1,7 @@
 const router = require('express').Router()
-const c=require('../controller/missionController')
+const c=require('../controller/missionController.js')
 
+router.post('/createmission',c.cr)
 router.get('/getmission',c.getAll)
 // router.get('/getMyMission/:id',c.findd)
 router.get('/getMission/:id',c.find)

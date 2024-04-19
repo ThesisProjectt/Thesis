@@ -26,12 +26,15 @@ const Mission = sequelize.define('Mission', {
 const getMission=()=>{
   return Mission.findAll({})
 }
-
+const getmissionforsupper=()=>{
+  
+}
 
 const postMissions = (obj)=>{
   return Mission.create(obj)
 }
+const create=(data) =>{ return Mission.create(data)};
 
-module.exports = {Mission,getMission,postMissions};
+module.exports = {Mission,getMission,postMissions,create};
 
 

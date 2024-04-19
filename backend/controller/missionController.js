@@ -25,6 +25,15 @@ const find= async(req,res)=>{
   }
 
 
-module.exports={
-    getAll,find
+const cr= async(req,res)=>{
+    try{
+        const x=db.create(req.body);
+        res.status(201).json(x)
+    }catch(e){
+        res.send(e)
+    }
 }
+module.exports = {
+    cr,getAll,find
+
+  };

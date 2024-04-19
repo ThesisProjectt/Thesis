@@ -49,6 +49,39 @@ const login = async (req, res) => {
     }
   }
 
+const getalls=async(req,res)=>{
+    try{
+        let sup=await db.getall()
+        res.status(200).json(sup);
+        
+    } catch(e){
+        console.log("Error")
+        res.status(400).json({"error": e}); 
+    }
+}
+const supernotuncludeteam=async(req,res)=> {
+    try{
+        let sup=await db.supernotanyteam()
+        res.status(200).json(sup);
+        
+    } catch(e){
+        console.log("Error")
+        res.status(400).json({"error": e}); 
+    }
+}
+const suppmission=async(req,res)=>{
+    
+    try{
+        const id = req.params.id
+        let data= await db.suppermission(id)
+        res.status(200).json(data)
+    }catch(e){
+        res.status(400).send(e);
+    }
+}
 module.exports={
-    create,login,getsuper
+    create,login,getsuper,
+    getalls,
+    supernotuncludeteam,
+    suppmission
 }

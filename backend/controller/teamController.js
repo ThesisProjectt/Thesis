@@ -30,5 +30,28 @@ const find = async (req,res)=>{
     }
 }
 
+const teamwithoutmission=async(req,res)=>{
+  try{
+    const d=req.body.date
+    var result = await db.teamwithoutmission(d)
+    res.status(201).json(result)
+  }catch(err){
+    res.send(err)
+  }
+
+}
+const getteam=async(req,res)=>{
+    try{
+        const result= await db.getteam()
+        res.status(201).json(result)
+    }catch(err){
+        res.send(err)
+      }
+    
+}
 module.exports={
-    createteam,getAllTeam, find }
+    createteam,find,
+    teamwithoutmission,
+    getteam,getAllTeam
+}
+

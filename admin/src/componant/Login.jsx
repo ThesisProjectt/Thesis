@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import Bg from "../assets/bg.png";
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
-import axios from "axios"
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const log = async () => {
-    if (email==="" || password==="") {
-      return ("Please enter both email and password");
+    if (email === "" || password === "") {
+      return "Please enter both email and password";
     }
     const data = { email: email, password: password };
- 
+
     try {
       await axios
-        .post("http://localhost:3000/admin/login",data)
-        .then( (res) => {
-          Cookies.set('user',res.data.id)
-                })
+        .post("http://localhost:3000/admin/login", data)
+        .then((res) => {
+          Cookies.set("user", res.data.id);
+        })
         .catch((err) => {
           console.log(err);
         });
-      
     } catch (err) {
       console.error(err);
     }
@@ -47,20 +46,24 @@ function login() {
               type="text"
               placeholder="Your e-mail address"
               className="text-start w-full p-4 rounded-lg shadow-md focus:outline-none"
-              onChange={(e)=>{setEmail(e.target.value)}}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <input
               type="password"
               placeholder="Password"
               className="text-start w-full p-4 rounded-lg shadow-md focus:outline-none "
-              onChange={(e)=>{setPassword(e.target.value)}}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <button
               style={{ background: "#02337B" }}
               className="text-center text-white rounded-lg text-lg w-full p-3 "
               onClick={() => {
                 log();
-                navigate('/dashboard');
+                navigate("/dashboard");
               }}
             >
               Sign In

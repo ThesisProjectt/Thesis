@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/h-logo.png";
 import profil from "../assets/profil-icon.png";
 import notif from "../assets/notif.png";
@@ -8,27 +8,39 @@ import Home from "./Home";
 import Employeelist from "./Employeelist";
 import Clientlist from "./Clientlist";
 import Createteam from "./Createteam";
+import RequestList from "./Requestlist";
+import Category from "./Category";
+import Service from "./Service";
+import Pack from './Pack'
 function Dashboard() {
-
   const [showDropdown, setShowDropdown] = useState(false);
-  const [view,setView]=useState('home');
+  const [view, setView] = useState("home");
+  const [refresh,setRefresh]=useState(true)
+useEffect(()=>{
 
+},[!refresh])
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-  const render=()=>{
-    if (view==='employee') return <Employeelist/>;  
-    else if (view==='home') return <Home />;
-    else if (view==='clientlist') return <Clientlist />;
-    else if (view==="createteam")return <Createteam />
-  }
+  const render = () => {
+    if (view === "employee") return <Employeelist change={changeView} />;
+    else if (view === "home") return <Home  />;
+    else if (view === "clientlist") return <Clientlist />;
+    else if (view === "createteam") return <Createteam change={changeView} changeref={changeref} />;
+    else if (view === "request") return <RequestList />;
+    else if (view === "category") return <Category change={changeView} />;
+    else if (view === "service") return <Service change={changeView} />;
+    else if (view === "pack") return <Pack change={changeView} />;
+  };
   const changeView = (newView) => {
     setView(newView);
   };
-  
+  const changeref=()=>{
+    setRefresh(!refresh)
+  }
 
   return (
-    <div  style={{   height:"100%" }}>
+    <div style={{ height: "100%" }}>
       <div className="container mx-auto px-4 py-8 max-w-8xl">
         <header className="flex justify-between items-center">
           <div>
@@ -71,28 +83,71 @@ function Dashboard() {
         <div className="flex mt-20">
           <div className="w-1/4 mr-8">
             <div className="bg-white rounded-md p-6 mb-8">
-              <button className="bg-teal-500 w-full text-white px-5 py-3 rounded-md hover:bg-teal-700" onClick={()=>{
-                changeView('createteam')
-              }}>
+              <button
+                className="bg-teal-500 w-full text-white px-5 py-3 rounded-md hover:bg-teal-700"
+                onClick={() => {
+                  changeView("createteam");
+                }}
+              >
                 Create a team
               </button>
             </div>
             <div className="bg-white rounded-md p-4 mb-8">
               <ul>
-                <li className="text-teal-500 font-bold p-2" onClick={()=>{changeView('home')}}>Dashboard</li>
-                <li className="text-gray-700 p-2 hover:text-teal-500" onClick={()=>{changeView('clientlist')}}>Customer list</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500" onClick={()=>{changeView('employee')}}>List of employees</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">List of teams</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">Create Pack</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">Create Service</li>
-                <li className="text-gray-700  p-2 hover:text-teal-500">Create Category</li>
-
+                <li
+                  className="text-teal-500 font-bold p-2"
+                  onClick={() => {
+                    changeView("home");
+                  }}
+                >
+                  Dashboard
+                </li>
+                <li
+                  className="text-gray-700 p-2 hover:text-teal-500"
+                  onClick={() => {
+                    changeView("clientlist");
+                  }}
+                >
+                  Customer list
+                </li>
+                <li
+                  className="text-gray-700  p-2 hover:text-teal-500"
+                  onClick={() => {
+                    changeView("employee");
+                  }}
+                >
+                  Employees List
+                </li>
+                <li
+                  className="text-gray-700  p-2 hover:text-teal-500"
+                  onClick={() => {
+                    changeView("request");
+                  }}
+                >
+                  Request List
+                </li>
+                <li className="text-gray-700  p-2 hover:text-teal-500"
+                onClick={() => {
+                  changeView("pack");
+                }}>
+                  Create Pack
+                </li>
+                <li className="text-gray-700  p-2 hover:text-teal-500"
+                onClick={() => {
+                  changeView("service");
+                }}>
+                  Create Service
+                </li>
+                <li className="text-gray-700  p-2 hover:text-teal-500"
+                onClick={() => {
+                  changeView("category");
+                }}>
+                  Create Category
+                </li>
               </ul>
             </div>
           </div>
-          <div className="w-full">
-            {render()}
-          </div>
+          <div className="w-full">{render()}</div>
         </div>
       </div>
     </div>

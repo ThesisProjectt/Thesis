@@ -29,6 +29,16 @@ const update=async(req,res)=>{
   catch(error){console.log(error)}
 }
 
-module.exports={
-    getAll,find,update
+
+const cr= async(req,res)=>{
+    try{
+        const x=db.create(req.body);
+        res.status(201).json(x)
+    }catch(e){
+        res.send(e)
+    }
 }
+module.exports = {
+    cr,getAll,find,update
+
+  };

@@ -31,10 +31,18 @@ const Mission = sequelize.define('Mission', {
   tableName: 'mission',
   timestamps: false
 });
+// add s to getMission  there is 2 gtemission
+const getMission=()=>{
+  return Mission.findAll({})
+}
+
+
 
 const postMissions = (obj)=>{
   return Mission.create(obj)
 }
+const create=(data) =>{ return Mission.create(data)};
+
 
 const getMission=(id)=>{
   return Mission.findAll({ where: { team_id: id } })
@@ -46,7 +54,8 @@ const updateMission=(data,id)=>{
   return Mission.update(data,{where: {id:id}})
 }
 
-module.exports = {Mission,getMission,updateMission,getAllMission,postMissions}
+module.exports = {Mission,getMission,updateMission,getAllMission,postMissions,create}
+
 
 
 

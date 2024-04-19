@@ -23,6 +23,10 @@ const Supervisor = sequelize.define('Supervisor', {
   password: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  phone: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 }, {
   tableName: 'supervisor',
@@ -30,6 +34,23 @@ const Supervisor = sequelize.define('Supervisor', {
 });
 const createsuper=(obj)=>{
   return Supervisor.create(obj)
+}
+const getall=()=>{
+  return Supervisor.findAll({})
+}
+const supernotanyteam=()=>{
+   return Supervisor.findAll({
+    where: {
+      '$team.supervisor_id$': null 
+    },
+      include: [{
+        model: team.Team,
+        required: false, 
+        attributes: [] 
+      }]
+    });
+
+   
 }
 
 const findSuper=()=>{
@@ -39,6 +60,8 @@ const findSuper=()=>{
 const getsuper=(obj)=>{
   return Supervisor.findAll({where:{email:obj.email,password:obj.password}});
 }
+
+
 const service = async (id) => {
   const supervisors = await Supervisor.findAll({
     where: {
@@ -116,6 +139,7 @@ const supervisormission = async (id) => {
 
 const suppermission = async (id) => {
   const supp= await Supervisor.findAll({
+
     where: {
       id: id
     },
@@ -131,7 +155,8 @@ const suppermission = async (id) => {
         ]
       }
     ]
-  })
+  });
+
 
 //   const missionIds = supp[0].Team.Missions[0].request_id
 
@@ -153,5 +178,6 @@ return supp
 }
 
 
-module.exports = {Supervisor,createsuper,getsuper,service,findOnesupervisor,supervisormission,suppermission};
+module.exports = {Supervisor,createsuper,getsuper,service,findOnesupervisor,supervisormission,findSuper,getall,supernotanyteam,suppermission};
+
 

@@ -1,6 +1,11 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
+
+const mission=require("./missionModel");
+const request=require('./requestModel')
+
 const employee=require('./employeeModel')
+
 
 const Team = sequelize.define('Team', {
   id: {
@@ -19,6 +24,24 @@ const Team = sequelize.define('Team', {
 const create=(obj)=>{
   return Team.create(obj)
 }
+const teamwithoutmission= async(date)=>{
+  const teamsWithMissions = await Team.findAll({
+    include: [
+      {
+        model: mission.Mission,
+      }
+    ]
+  });
+  const teamsWithoutMission = teamsWithMissions.filter(team => {
+    if (!team.Missions || team.Missions.length === 0) {
+      return true; 
+    } 
+  });
+  return teamsWithoutMission;
+}
+const getteam=()=>{
+  return Team.findAll({});
+}
 
 
 const findTeam =(id =>{
@@ -34,4 +57,4 @@ const findTeam =(id =>{
 
 
 
-module.exports = {Team,create,findTeam};
+module.exports = {Team,create,findTeam,teamwithoutmission,getteam};
